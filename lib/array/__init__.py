@@ -1,1 +1,1 @@
-from .n_sum import n_sum
+from .n_sum import n_sum  # noqa: F401
