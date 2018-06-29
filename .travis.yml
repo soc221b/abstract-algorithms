@@ -8,4 +8,8 @@ install:
     - pip install -r test_requirements.txt
 script:
     - flake8 . --count
-    - python -m pytest test
+    - coverage run --source=test,lib -m unittest
+
+after_success:
+    - coverage report -m
+    - coveralls
