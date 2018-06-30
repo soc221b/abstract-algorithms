@@ -1,31 +1,29 @@
-language: python
-
 install:
-    - namanager -s third_party/namanager_settings.json --require --count
+- namanager -s third_party/namanager_settings.json --require --count
 
 matrix:
-    include:
-        - os: linux
-            language: python
-            include:
-                python: 3.4
-                python: 3.5
-                python: 3.6
-            script:
-                - pip install -r test_requirements.txt
-                - flake8 . --count
-                - coverage run --source=test,lib -m unittest
-            after_success:
-                - coverage report -m
-                - coveralls
+  include:
+    - os: linux
+      language: python
+      include:
+        python: 3.4
+        python: 3.5
+        python: 3.6
+      script:
+        - pip install -r test_requirements.txt
+        - flake8 . --count
+        - coverage run --source=test,lib -m unittest
+      after_success:
+        - coverage report -m
+        - coveralls
 
-        - os: linux
-            language: cpp
-            script:
-                ./script/test_cpp.sh
-            addons:
-                apt:
-                    sources:
-                        - ubuntu-toolchain-r-test
-            packages:
-                - g++-7
+    - os: linux
+      language: cpp
+      script:
+        ./script/test_cpp.sh
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+      packages:
+          - g++-7
