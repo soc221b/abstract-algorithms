@@ -1,12 +1,3 @@
-language: python
-
-python:
-  - "3.6"
-
-install:
-- pip install namanager
-- namanager -s third_party/namanager_settings.json --require --count
-
 matrix:
   include:
     - os: linux
@@ -19,6 +10,7 @@ matrix:
         - pip install -r test_requirements.txt
         - flake8 lib test --count
         - coverage run --source=test,lib -m unittest
+        - namanager -s third_party/namanager_settings.json --require --count
       after_success:
         - coverage report -m
         - coveralls
