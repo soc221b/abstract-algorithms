@@ -1,3 +1,7 @@
+language: python
+
+python: 3.6
+
 matrix:
   include:
     - os: linux
@@ -6,8 +10,9 @@ matrix:
         python: 3.4
         python: 3.5
         python: 3.6
-      script:
+      before_install:
         - pip install -r test_requirements.txt
+      script:
         - flake8 lib test --count
         - coverage run --source=test,lib -m unittest
         - namanager -s third_party/namanager_settings.json --require --count
@@ -23,5 +28,7 @@ matrix:
         apt:
           sources:
             - ubuntu-toolchain-r-test
-      packages:
-          - g++-7
+          packages:
+            - g++-7
+      env:
+        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
