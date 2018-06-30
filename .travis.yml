@@ -5,8 +5,16 @@ matrix:
         - python: 3.5
         - python: 3.6
 install:
+    # general
+    - git submodule update
+
+    # python
     - pip install -r test_requirements.txt
 script:
+    # general
+    - namanager -s third_party/namanager_settings.json --require --count
+
+    # python
     - flake8 . --count
     - coverage run --source=test,lib -m unittest
 
