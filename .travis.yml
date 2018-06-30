@@ -17,7 +17,7 @@ matrix:
         python: 3.6
       script:
         - pip install -r test_requirements.txt
-        - flake8 . --count
+        - flake8 lib test --count
         - coverage run --source=test,lib -m unittest
       after_success:
         - coverage report -m
