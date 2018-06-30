@@ -1,4 +1,5 @@
 install:
+- pip install namanager
 - namanager -s third_party/namanager_settings.json --require --count
 
 matrix:
