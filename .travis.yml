@@ -18,3 +18,14 @@ matrix:
             after_success:
                 - coverage report -m
                 - coveralls
+
+        - os: linux
+            language: cpp
+            script:
+                ./script/test_cpp.sh
+            addons:
+                apt:
+                    sources:
+                        - ubuntu-toolchain-r-test
+            packages:
+                - g++-7
