@@ -1,6 +1,7 @@
 import inspect
 from lib.stack import stack, reversed_stack
 from lib.queue import queue, reversed_queue
+from lib.deque import deque, reversed_deque
 
 
 def reversed(obj):
@@ -8,6 +9,8 @@ def reversed(obj):
         return reversed_stack(obj)
     elif isinstance(obj, queue):
         return reversed_queue(obj)
+    elif isinstance(obj, deque):
+        return reversed_deque(obj)
     else:
         func_self = globals()[
             inspect.getframeinfo(inspect.currentframe()).function]
