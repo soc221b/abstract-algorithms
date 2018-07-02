@@ -4,8 +4,10 @@ from lib.queue import queue
 def return_self(value):
     return value
 
+
 def left_closure(n):
     return n.left
+
 
 def right_closure(n):
     return n.right
