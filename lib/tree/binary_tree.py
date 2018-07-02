@@ -5,7 +5,7 @@ from lib.tree.node_common_closure import (
     right_closure,
     less_closure
 )
-from lib.util.comparison import Comparison
+from lib.util.comparison_closure import Comparison
 
 
 class BinaryTree():

@@ -1,6 +1,6 @@
 import unittest
 
-from lib.util.comparison import Comparison
+from lib.util.comparison_closure import Comparison
 
 
 class TestComparison(unittest.TestCase):

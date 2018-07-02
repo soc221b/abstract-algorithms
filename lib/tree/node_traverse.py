@@ -1,8 +1,10 @@
 from lib.queue.queue import Queue
 from lib.tree.node_common_closure import (
-    self_closure,
     left_closure,
     right_closure,
+)
+from lib.util.common_closure import (
+    self_closure,
 )
 
 

@@ -1,7 +1,3 @@
-def self_closure(value):
-    return value
-
-
 def left_setter_closure(n, x):
     n.left = x
 

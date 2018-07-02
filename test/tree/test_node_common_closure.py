@@ -2,7 +2,6 @@ import unittest
 
 from lib.tree.node import Node
 from lib.tree.node_common_closure import (
-    self_closure,
     left_setter_closure,
     left_closure,
     right_setter_closure,
@@ -11,14 +10,12 @@ from lib.tree.node_common_closure import (
 )
 
 
-class TestCommonClosure(unittest.TestCase):
+class TestNodeCommonClosure(unittest.TestCase):
 
-    def test_common_closure(self):
+    def test_node_common_closure(self):
         root = Node(1)
         left = Node(0)
         right = Node(2)
-
-        self.assertEqual(self_closure(root), root)
 
         left_setter_closure(root, left)
         left_1 = root.left
