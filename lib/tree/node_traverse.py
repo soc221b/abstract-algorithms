@@ -13,7 +13,7 @@ def right_closure(n):
     return n.right
 
 
-class NodeTraversalAdapter():
+class NodeTraverseAdapter():
 
     def __init__(self, root, **kwargs):
         """
