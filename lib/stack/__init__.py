@@ -1,1 +1,1 @@
-from .stack import stack, reversed_stack  # noqa: F401
+from .stack import stack, reversed_stack

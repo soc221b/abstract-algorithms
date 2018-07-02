@@ -1,1 +1,1 @@
-from .deque import deque, reversed_deque  # noqa: F401
+from .deque import deque, reversed_deque
