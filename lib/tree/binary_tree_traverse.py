@@ -8,11 +8,11 @@ from lib.util.common_closure import (
 )
 
 
-class NodeTraverseAdapter():
+class BinaryTreeTraverseAdapter():
 
-    def __init__(self, root, **kwargs):
+    def __init__(self, binary_tree, **kwargs):
         """
-        root: Node-liked type
+        binary_tree: BinaryTree-liked type
         value_closure: function, optional
                        pass only one parameter node and
                        return what you want it is extracted.
@@ -23,7 +23,7 @@ class NodeTraverseAdapter():
                        given one parameter which is a node,
                        return right node of it.
         """
-        self.__root = root
+        self.__root = binary_tree.root
         self.__value_closure = kwargs.get('value_closure', self_closure)
         self.__left_closure = kwargs.get('left_closure', left_closure)
         self.__right_closure = kwargs.get('right_closure', right_closure)
@@ -133,33 +133,3 @@ class NodeTraverseAdapter():
         nodes.append(self.__value_closure(root))
 
         return nodes
-
-    def __repr__(self):
-        nodes = self.level_traversal()
-        for index, node in enumerate(nodes):
-            if node is None and index * 2 + 1 < len(nodes):
-                nodes.insert(index * 2 + 1, None)
-                nodes.insert(index * 2 + 2, None)
-        p = 0
-        while 2**p < len(nodes):
-            p += 1
-        while len(nodes) < 2**p:
-            nodes.append(None)
-
-        res = ""
-        if len(nodes):
-            res += "{0}\n".format(self.__value_closure(nodes[0]))
-            nodes = nodes[1:]
-        index = 0
-        p = 1
-        while index < len(nodes):
-            if nodes[index] is None:
-                res += "None "
-            else:
-                res += "{0} ".format(self.__value_closure(nodes[index]))
-            if index + 1 == pow(2, p):
-                res += "\n"
-                p += 1
-            index += 1
-        res += "\n"
-        return res
