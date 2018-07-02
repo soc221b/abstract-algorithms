@@ -6,7 +6,6 @@ from lib.tree.node_common_closure import (
     less_closure
 )
 from lib.util.comparison_closure import Comparison
-from lib.tree.binary_tree_traverse import BinaryTreeTraverseAdapter
 
 
 class BinaryTree():

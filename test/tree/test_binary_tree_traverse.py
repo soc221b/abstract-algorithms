@@ -82,7 +82,8 @@ class TestTreeTraverseAdapter(unittest.TestCase):
 
     def test_post_order_traversal(self):
         self.assertEqual(
-            BinaryTreeTraverseAdapter(empty_binary_tree).post_order_traversal(),
+            BinaryTreeTraverseAdapter(
+                empty_binary_tree).post_order_traversal(),
             [])
         self.assertEqual(
             BinaryTreeTraverseAdapter(binary_tree).post_order_traversal(),
