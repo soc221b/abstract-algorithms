@@ -10,15 +10,8 @@ class Event(Enum):
 
 class SomeWhere():
 
-    def __init__(self, decorator=None):
+    def __init__(self):
         self._member = {}
-        self._decorator = decorator
-
-    def __getattr__(self, name):
-        if self._decorator is not None:
-            return getattr(self._decorator, name)
-        else:
-            raise AttributeError
 
     def add_member(self, member):
         self._member[member] = "is here"
