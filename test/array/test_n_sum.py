@@ -1,8 +1,8 @@
+import unittest
+
 from lib.array import (
     n_sum,
 )
-
-import unittest
 
 
 class TestNSum(unittest.TestCase):

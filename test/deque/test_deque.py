@@ -1,5 +1,6 @@
 import unittest
 from random import random, randint
+
 from lib.deque import Deque
 from lib.overriden_built_in import reversed
 

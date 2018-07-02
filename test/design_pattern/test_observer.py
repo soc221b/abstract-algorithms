@@ -1,6 +1,7 @@
-from lib.design_pattern.observer import Notifier, Observer
 import unittest
 from enum import Enum
+
+from lib.design_pattern.observer import Notifier, Observer
 
 
 class Event(Enum):

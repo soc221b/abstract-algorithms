@@ -1,4 +1,5 @@
 import inspect
+
 from lib.stack.stack import Stack, reversed_stack
 from lib.queue.queue import Queue, reversed_queue
 from lib.deque.deque import Deque, reversed_deque

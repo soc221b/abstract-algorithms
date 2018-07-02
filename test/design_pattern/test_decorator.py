@@ -1,5 +1,6 @@
-from lib.design_pattern.decorator import Node, BalanceNode, ParentNode
 import unittest
+
+from lib.design_pattern.decorator import Node, BalanceNode, ParentNode
 
 
 class TestNode(unittest.TestCase):

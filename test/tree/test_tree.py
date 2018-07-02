@@ -1,5 +1,6 @@
 import unittest
 from random import random
+
 from lib.tree import Node
 from lib.tree import BinaryTree
 from lib.tree import NodeTraversalAdapter

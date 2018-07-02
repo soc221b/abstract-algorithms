@@ -1,5 +1,6 @@
 import unittest
 from random import random, randint
+
 from lib.stack import Stack
 from lib.overriden_built_in import reversed
 
