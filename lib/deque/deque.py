@@ -1,4 +1,4 @@
-class deque():
+class Deque():
 
     def __init__(self):
         self.__array = []
@@ -35,7 +35,7 @@ class deque():
         return len(self.__array)
 
     def copy(self):
-        copied_deque = deque()
+        copied_deque = Deque()
         for v in self.__array:
             copied_deque.push_back(v)
         return copied_deque

@@ -1,1 +1,1 @@
-from .queue import queue, reversed_queue
+from lib.queue.queue import Queue, reversed_queue

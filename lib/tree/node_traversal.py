@@ -1,4 +1,4 @@
-from lib.queue import queue
+from lib.queue.queue import Queue
 
 
 def return_self(value):
@@ -42,8 +42,8 @@ class NodeTraversalAdapter():
                 list of what returned by the value_closure
         """
         nodes = []
-        que1 = queue()
-        que2 = queue()
+        que1 = Queue()
+        que2 = Queue()
 
         if self.__root is not None:
             que1.push(self.__root)
@@ -58,7 +58,7 @@ class NodeTraversalAdapter():
                     nodes.append(self.__value_closure(peek))
                     que1.pop()
                 que1 = que2
-                que2 = queue()
+                que2 = Queue()
         return nodes
 
     def pre_order_traversal(self):

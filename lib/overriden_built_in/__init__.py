@@ -1,1 +1,1 @@
-from .overriden_built_in import reversed
+from lib.overriden_built_in.overriden_built_in import reversed

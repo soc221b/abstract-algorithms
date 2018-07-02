@@ -1,15 +1,15 @@
 import inspect
-from lib.stack import stack, reversed_stack
-from lib.queue import queue, reversed_queue
-from lib.deque import deque, reversed_deque
+from lib.stack.stack import Stack, reversed_stack
+from lib.queue.queue import Queue, reversed_queue
+from lib.deque.deque import Deque, reversed_deque
 
 
 def reversed(obj):
-    if isinstance(obj, stack):
+    if isinstance(obj, Stack):
         return reversed_stack(obj)
-    elif isinstance(obj, queue):
+    elif isinstance(obj, Queue):
         return reversed_queue(obj)
-    elif isinstance(obj, deque):
+    elif isinstance(obj, Deque):
         return reversed_deque(obj)
     else:
         func_self = globals()[

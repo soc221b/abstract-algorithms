@@ -1,4 +1,4 @@
-class queue():
+class Queue():
 
     def __init__(self):
         self.__array = []
@@ -24,7 +24,7 @@ class queue():
         return len(self.__array)
 
     def copy(self):
-        copied_queue = queue()
+        copied_queue = Queue()
         for v in self.__array:
             copied_queue.push(v)
         return copied_queue

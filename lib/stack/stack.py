@@ -1,4 +1,4 @@
-class stack():
+class Stack():
 
     def __init__(self):
         self.__array = []
@@ -24,7 +24,7 @@ class stack():
         return len(self.__array)
 
     def copy(self):
-        copied_stack = stack()
+        copied_stack = Stack()
         for v in self.__array:
             copied_stack.push(v)
         return copied_stack

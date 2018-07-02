@@ -1,6 +1,6 @@
 import unittest
 from random import random, randint
-from lib.queue import queue
+from lib.queue import Queue
 from lib.overriden_built_in import reversed
 
 
@@ -14,7 +14,7 @@ def get_random_values(n=randint(10, 20)):
 class TestQueue(unittest.TestCase):
 
     def test_queue_init(self):
-        que = queue()
+        que = Queue()
         self.assertEqual(que.size(), 0)
         self.assertEqual(que.is_empty(), True)
         with self.assertRaises(IndexError):
@@ -23,7 +23,7 @@ class TestQueue(unittest.TestCase):
             que.peek()
 
     def test_queue_push(self):
-        que = queue()
+        que = Queue()
         random_values = get_random_values()
         for v in random_values:
             que.push(v)
@@ -32,7 +32,7 @@ class TestQueue(unittest.TestCase):
             self.assertEqual(que.pop(), v)
 
     def test_queue_pop(self):
-        que = queue()
+        que = Queue()
         random_values = get_random_values()
         for v in random_values:
             que.push(v)
@@ -45,7 +45,7 @@ class TestQueue(unittest.TestCase):
             que.peek()
 
     def test_queue_peek(self):
-        que = queue()
+        que = Queue()
         random_values = get_random_values()
         for v in random_values:
             que.push(v)
@@ -54,7 +54,7 @@ class TestQueue(unittest.TestCase):
             que.pop()
 
     def test_queue_is_empty(self):
-        que = queue()
+        que = Queue()
         random_values = get_random_values()
         self.assertEqual(que.is_empty(), True)
         for v in random_values:
@@ -66,7 +66,7 @@ class TestQueue(unittest.TestCase):
         self.assertEqual(que.is_empty(), True)
 
     def test_queue_reverse(self):
-        que = queue()
+        que = Queue()
         random_values = get_random_values()
         for v in random_values:
             que.push(v)
@@ -76,7 +76,7 @@ class TestQueue(unittest.TestCase):
             que.pop()
 
     def test_queue_size(self):
-        que = queue()
+        que = Queue()
         random_values = get_random_values()
         for i, v in enumerate(random_values):
             que.push(v)
@@ -86,7 +86,7 @@ class TestQueue(unittest.TestCase):
             self.assertEqual(que.size(), len(random_values) - i - 1)
 
     def test_queue_copy(self):
-        que = queue()
+        que = Queue()
         random_values = get_random_values()
         for v in random_values:
             que.push(v)
@@ -100,7 +100,7 @@ class TestQueue(unittest.TestCase):
 class TestQueueHelper(unittest.TestCase):
 
     def test_queue_reversed(self):
-        que = queue()
+        que = Queue()
         random_values = get_random_values()
         for v in random_values:
             que.push(v)
@@ -113,7 +113,7 @@ class TestQueueHelper(unittest.TestCase):
     def test_queue_reversed_with_override(self):
         self.assertEqual(list(reversed([123, 456])), [456, 123])
 
-        que = queue()
+        que = Queue()
         random_values = get_random_values()
         for v in random_values:
             que.push(v)

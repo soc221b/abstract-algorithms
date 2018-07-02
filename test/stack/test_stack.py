@@ -1,6 +1,6 @@
 import unittest
 from random import random, randint
-from lib.stack import stack
+from lib.stack import Stack
 from lib.overriden_built_in import reversed
 
 
@@ -14,7 +14,7 @@ def get_random_values(n=randint(10, 20)):
 class TestStack(unittest.TestCase):
 
     def test_stack_init(self):
-        stk = stack()
+        stk = Stack()
         self.assertEqual(stk.size(), 0)
         self.assertEqual(stk.is_empty(), True)
         with self.assertRaises(IndexError):
@@ -23,7 +23,7 @@ class TestStack(unittest.TestCase):
             stk.peek()
 
     def test_stack_push(self):
-        stk = stack()
+        stk = Stack()
         random_values = get_random_values()
         for v in random_values:
             stk.push(v)
@@ -32,7 +32,7 @@ class TestStack(unittest.TestCase):
             self.assertEqual(stk.pop(), v)
 
     def test_stack_pop(self):
-        stk = stack()
+        stk = Stack()
         random_values = get_random_values()
         for v in random_values:
             stk.push(v)
@@ -45,7 +45,7 @@ class TestStack(unittest.TestCase):
             stk.peek()
 
     def test_stack_peek(self):
-        stk = stack()
+        stk = Stack()
         random_values = get_random_values()
         for v in random_values:
             stk.push(v)
@@ -54,7 +54,7 @@ class TestStack(unittest.TestCase):
             stk.pop()
 
     def test_stack_is_empty(self):
-        stk = stack()
+        stk = Stack()
         random_values = get_random_values()
         self.assertEqual(stk.is_empty(), True)
         for v in random_values:
@@ -66,7 +66,7 @@ class TestStack(unittest.TestCase):
         self.assertEqual(stk.is_empty(), True)
 
     def test_stack_reverse(self):
-        stk = stack()
+        stk = Stack()
         random_values = get_random_values()
         for v in random_values:
             stk.push(v)
@@ -76,7 +76,7 @@ class TestStack(unittest.TestCase):
             stk.pop()
 
     def test_stack_size(self):
-        stk = stack()
+        stk = Stack()
         random_values = get_random_values()
         for i, v in enumerate(random_values):
             stk.push(v)
@@ -86,7 +86,7 @@ class TestStack(unittest.TestCase):
             self.assertEqual(stk.size(), len(random_values) - i - 1)
 
     def test_stack_copy(self):
-        stk = stack()
+        stk = Stack()
         random_values = get_random_values()
         for v in random_values:
             stk.push(v)
@@ -100,7 +100,7 @@ class TestStack(unittest.TestCase):
 class TestStackHelper(unittest.TestCase):
 
     def test_stack_reversed(self):
-        stk = stack()
+        stk = Stack()
         random_values = get_random_values()
         for v in random_values:
             stk.push(v)
@@ -113,7 +113,7 @@ class TestStackHelper(unittest.TestCase):
     def test_stack_reversed_with_override(self):
         self.assertEqual(list(reversed([123, 456])), [456, 123])
 
-        stk = stack()
+        stk = Stack()
         random_values = get_random_values()
         for v in random_values:
             stk.push(v)

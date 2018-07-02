@@ -1,1 +1,1 @@
-from .deque import deque, reversed_deque
+from lib.deque.deque import Deque, reversed_deque

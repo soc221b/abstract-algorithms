@@ -1,6 +1,6 @@
 import unittest
 from random import random, randint
-from lib.deque import deque
+from lib.deque import Deque
 from lib.overriden_built_in import reversed
 
 
@@ -14,7 +14,7 @@ def get_random_values(n=randint(10, 20)):
 class TestDeque(unittest.TestCase):
 
     def test_deque_init(self):
-        deq = deque()
+        deq = Deque()
         self.assertEqual(deq.size(), 0)
         self.assertEqual(deq.is_empty(), True)
         with self.assertRaises(IndexError):
@@ -27,7 +27,7 @@ class TestDeque(unittest.TestCase):
             deq.back()
 
     def test_deque_push_front(self):
-        deq = deque()
+        deq = Deque()
         random_values = get_random_values()
         for v in random_values:
             deq.push_front(v)
@@ -36,7 +36,7 @@ class TestDeque(unittest.TestCase):
             self.assertEqual(deq.pop_front(), v)
 
     def test_deque_push_back(self):
-        deq = deque()
+        deq = Deque()
         random_values = get_random_values()
         for v in random_values:
             deq.push_back(v)
@@ -45,7 +45,7 @@ class TestDeque(unittest.TestCase):
             self.assertEqual(deq.pop_back(), v)
 
     def test_deque_pop_front(self):
-        deq = deque()
+        deq = Deque()
         random_values = get_random_values()
         for v in random_values:
             deq.push_front(v)
@@ -58,7 +58,7 @@ class TestDeque(unittest.TestCase):
             deq.front()
 
     def test_deque_pop_back(self):
-        deq = deque()
+        deq = Deque()
         random_values = get_random_values()
         for v in random_values:
             deq.push_back(v)
@@ -71,7 +71,7 @@ class TestDeque(unittest.TestCase):
             deq.back()
 
     def test_deque_front(self):
-        deq = deque()
+        deq = Deque()
         random_values = get_random_values()
         for v in random_values:
             deq.push_back(v)
@@ -80,7 +80,7 @@ class TestDeque(unittest.TestCase):
             deq.pop_front()
 
     def test_deque_back(self):
-        deq = deque()
+        deq = Deque()
         random_values = get_random_values()
         for v in random_values:
             deq.push_front(v)
@@ -89,7 +89,7 @@ class TestDeque(unittest.TestCase):
             deq.pop_back()
 
     def test_deque_is_empty(self):
-        deq = deque()
+        deq = Deque()
         random_values = get_random_values()
         self.assertEqual(deq.is_empty(), True)
         for v in random_values:
@@ -101,7 +101,7 @@ class TestDeque(unittest.TestCase):
         self.assertEqual(deq.is_empty(), True)
 
     def test_deque_reverse(self):
-        deq = deque()
+        deq = Deque()
         # [1, 2, 3]
         random_values = get_random_values()
         # [1, 2, 3]
@@ -114,7 +114,7 @@ class TestDeque(unittest.TestCase):
             deq.pop_back()
 
     def test_deque_size(self):
-        deq = deque()
+        deq = Deque()
         random_values = get_random_values()
         for i, v in enumerate(random_values):
             deq.push_back(v)
@@ -124,7 +124,7 @@ class TestDeque(unittest.TestCase):
             self.assertEqual(deq.size(), len(random_values) - i - 1)
 
     def test_deque_copy(self):
-        deq = deque()
+        deq = Deque()
         # [1, 2, 3]
         random_values = get_random_values()
         # [1, 2, 3]
@@ -141,7 +141,7 @@ class TestDeque(unittest.TestCase):
 class TestDequeHelper(unittest.TestCase):
 
     def test_deque_reversed(self):
-        deq = deque()
+        deq = Deque()
         # [1, 2, 3]
         random_values = get_random_values()
         # [1, 2, 3]
@@ -157,7 +157,7 @@ class TestDequeHelper(unittest.TestCase):
     def test_deque_reversed_with_override(self):
         self.assertEqual(list(reversed([123, 456])), [456, 123])
 
-        deq = deque()
+        deq = Deque()
         # [1, 2, 3]
         random_values = get_random_values()
         # [1, 2, 3]

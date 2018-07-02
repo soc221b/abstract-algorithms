@@ -1,3 +1,3 @@
-from .node import Node
-from .binary_tree import BinaryTree
-from .node_traversal import NodeTraversalAdapter
+from lib.tree.node import Node
+from lib.tree.binary_tree import BinaryTree
+from lib.tree.node_traversal import NodeTraversalAdapter

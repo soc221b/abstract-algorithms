@@ -1,1 +1,1 @@
-from .stack import stack, reversed_stack
+from lib.stack.stack import Stack, reversed_stack
