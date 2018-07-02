@@ -37,8 +37,6 @@ class SomeWhere():
             for member in self._member:
                 res.append("{0} received, A false alarm ...".format(member))
 
-        return res
-
 
 # decorate
 class LivingRoom(SomeWhere):
