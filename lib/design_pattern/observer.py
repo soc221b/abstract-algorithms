@@ -65,14 +65,23 @@ class Observer():
             raise AttributeError
 
     def attach_notifier(self, notifier):
+        """
+        notifier: Notifier-liked instance
+        """
         self._notifiers[notifier] = notifier.attach_observer(self)
 
     def detach_notifier(self, notifier):
+        """
+        notifier: Notifier-liked instance
+        """
         notifier.detach_observer(self._notifiers[notifier])
         del self._notifiers[notifier]
 
     # class which be decorted needs to impelment this function
     def update(self, event):
+        """
+        event: object
+        """
         return self._decorator.update(event)
 
 
@@ -90,7 +99,7 @@ class Notifier():
 
     def attach_observer(self, observer):
         """
-        observer: Observer
+        observer: Observer-liked instance
         return: int
                 identify the observer
         """
@@ -99,8 +108,15 @@ class Notifier():
         return identifier
 
     def detach_observer(self, identifier):
+        """
+        identifier: int
+                    which is returned by attach_observer member-function
+        """
         del self._observers[identifier]
 
     def notify(self, event):
+        """
+        event: object
+        """
         for observer in self._observers.values():
             observer.update(event)
