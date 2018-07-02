@@ -1,21 +1,11 @@
-def left_setter_closure(n, x):
-    n.left = x
-
-
-def left_closure(n):
-    return n.left
-
-
-def right_setter_closure(n, x):
-    n.right = x
-
-
-def right_closure(n):
-    return n.right
-
-
-def less_closure(a, b):
-    return a.value < b.value
+from lib.tree.node_common_closure import (
+    left_setter_closure,
+    left_closure,
+    right_setter_closure,
+    right_closure,
+    less_closure
+)
+from lib.util.comparison import Comparison
 
 
 class BinaryTree():
@@ -32,7 +22,8 @@ class BinaryTree():
                        given one parameter which is a node,
                        return right node of it.
         """
-        self.__less_closure = kwargs.get('less_closure', less_closure)
+        self.__less_closure = kwargs.get('less_closure',
+                                         Comparison(less_closure).less_closure)
         self.__left_closure = kwargs.get('left_closure', left_closure)
         self.__right_closure = kwargs.get('right_closure', right_closure)
 

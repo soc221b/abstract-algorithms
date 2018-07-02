@@ -1,16 +1,9 @@
 from lib.queue.queue import Queue
-
-
-def self_closure(value):
-    return value
-
-
-def left_closure(n):
-    return n.left
-
-
-def right_closure(n):
-    return n.right
+from lib.tree.node_common_closure import (
+    self_closure,
+    left_closure,
+    right_closure,
+)
 
 
 class NodeTraverseAdapter():
