@@ -1,6 +1,7 @@
 import unittest
 from random import random
 from lib.tree import Node
+from lib.tree import BinaryTree
 
 
 class TestNode(unittest.TestCase):
@@ -35,3 +36,14 @@ class TestNode(unittest.TestCase):
         right_node = Node(r)
         node.right = right_node
         self.assertEqual(node.right, right_node)
+
+
+class TestBinaryTree(unittest.TestCase):
+
+    def test_insert(self):
+        bt = BinaryTree()
+        bt.insert(Node(3))
+        bt.insert(Node(1))
+        bt.insert(Node(5))
+        self.assertLess(bt.root.value, bt.root.right.value)
+        self.assertLess(bt.root.left.value, bt.root.value)
