@@ -1,7 +1,7 @@
 from lib.queue.queue import Queue
 
 
-def return_self(value):
+def self_closure(value):
     return value
 
 
@@ -29,7 +29,7 @@ class NodeTraverseAdapter():
                        return right node of it.
         """
         self.__root = root
-        self.__value_closure = kwargs.get('value_closure', return_self)
+        self.__value_closure = kwargs.get('value_closure', self_closure)
         self.__left_closure = kwargs.get('left_closure', left_closure)
         self.__right_closure = kwargs.get('right_closure', right_closure)
 
