@@ -14,14 +14,20 @@ example:
             super().__init__(base)
 
 note:
-1. be careful if you want to override __getattr__ method to decorator class.
+1. Be careful if you want to override __getattr__ method to decorator class.
+2. If you want to explicitly call class the decorated's function or else,
+   then you can call it from 'decorated_class' property indirectly.
 """
 
 
 class Decorator():
 
-    def __init__(self, base):
-        self.__base = base
+    def __init__(self, decorated_class):
+        self.__decorated_class = decorated_class
+
+    @property
+    def decorated_class(self):
+        return self.__decorated_class
 
     def __getattr__(self, name):
-        return getattr(self.__base, name)
+        return getattr(self.__decorated_class, name)
