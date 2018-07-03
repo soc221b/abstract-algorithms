@@ -1,10 +1,29 @@
 import unittest
 
-from lib.design_pattern.decorator import (
-    Node,
-    BalanceNodeDecorator,
-    ParentNodeDecorator
-)
+from lib.design_pattern.decorator import Decorator
+
+
+class Node():
+
+    def __init__(self, x=None):
+        self._value = x
+        self._left = None
+        self._right = None
+
+
+class BalanceNodeDecorator(Decorator):
+
+    def __init__(self, base):
+        super().__init__(base)
+        self._balance = 0
+        self._height = 1
+
+
+class ParentNodeDecorator(Decorator):
+
+    def __init__(self, base):
+        super().__init__(base)
+        self._parent = None
 
 
 class TestNode(unittest.TestCase):
