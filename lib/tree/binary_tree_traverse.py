@@ -9,7 +9,7 @@ from lib.util.common_closure import (
 )
 
 
-class BinaryTreeTraverseAdapter():
+class BinaryTreeTraverseDecorator():
 
     def __init__(self, binary_tree, **kwargs):
         """

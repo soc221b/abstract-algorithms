@@ -5,7 +5,7 @@ from lib.tree.tree_common_closure import (
 from lib.util.common_closure import is_none_closure
 
 
-class BinaryTreeSearchingAdapter():
+class BinaryTreeSearchingDecorator():
 
     def __init__(self, binary_tree, **kwargs):
         self.__binary_tree = binary_tree

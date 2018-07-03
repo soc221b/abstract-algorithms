@@ -1,6 +1,6 @@
 import unittest
 
-from lib.tree import Node, BinaryTree, BinaryTreeTraverseAdapter
+from lib.tree import Node, BinaryTree, BinaryTreeTraverseDecorator
 
 
 """
@@ -48,49 +48,49 @@ binary_tree.insert(n18)
 binary_tree.insert(n19)
 
 
-class TestTreeTraverseAdapter(unittest.TestCase):
+class TestTreeTraverseDecorator(unittest.TestCase):
 
-    def test_adapter(self):
+    def test_decorator(self):
         # visit to BinaryTree's property
-        BinaryTreeTraverseAdapter(empty_binary_tree).root
+        BinaryTreeTraverseDecorator(empty_binary_tree).root
 
     def test_level_traversal(self):
         self.assertEqual(
-            BinaryTreeTraverseAdapter(empty_binary_tree).level_traversal(),
+            BinaryTreeTraverseDecorator(empty_binary_tree).level_traversal(),
             [])
         self.assertEqual(
-            BinaryTreeTraverseAdapter(binary_tree).level_traversal(),
+            BinaryTreeTraverseDecorator(binary_tree).level_traversal(),
             [n10, n5, n15, n2, n8, n13, n17, None, n4, n6, None,
              n12, None, None, n18, n3, None, None, n7, n11,
              None, None, n19])
 
     def test_pre_order_traversal(self):
         self.assertEqual(
-            BinaryTreeTraverseAdapter(empty_binary_tree).pre_order_traversal(),
+            BinaryTreeTraverseDecorator(empty_binary_tree).pre_order_traversal(),
             [])
         self.assertEqual(
-            BinaryTreeTraverseAdapter(binary_tree).pre_order_traversal(),
+            BinaryTreeTraverseDecorator(binary_tree).pre_order_traversal(),
             [n10, n5, n2, None, n4, n3, None, n8, n6, None,
              n7, None, n15, n13, n12, n11, None, None, n17,
              None, n18, None, n19])
 
     def test_in_order_traversal(self):
         self.assertEqual(
-            BinaryTreeTraverseAdapter(empty_binary_tree).in_order_traversal(),
+            BinaryTreeTraverseDecorator(empty_binary_tree).in_order_traversal(),
             [])
         self.assertEqual(
-            BinaryTreeTraverseAdapter(binary_tree).in_order_traversal(),
+            BinaryTreeTraverseDecorator(binary_tree).in_order_traversal(),
             [None, n2, n3, n4, None, n5, None, n6, n7, n8, None,
              n10, n11, n12, None, n13, None, n15, None, n17, None,
              n18, n19])
 
     def test_post_order_traversal(self):
         self.assertEqual(
-            BinaryTreeTraverseAdapter(
+            BinaryTreeTraverseDecorator(
                 empty_binary_tree).post_order_traversal(),
             [])
         self.assertEqual(
-            BinaryTreeTraverseAdapter(binary_tree).post_order_traversal(),
+            BinaryTreeTraverseDecorator(binary_tree).post_order_traversal(),
             [None, n3, None, n4, n2, None, n7, n6, None, n8, n5,
              n11, None, n12, None, n13, None, None, n19, n18, n17,
              n15, n10])

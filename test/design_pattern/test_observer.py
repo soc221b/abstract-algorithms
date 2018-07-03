@@ -1,7 +1,7 @@
 import unittest
 from enum import Enum
 
-from lib.design_pattern.observer import NotifierAdapter, ObserverAdapter
+from lib.design_pattern.observer import NotifierDecorator, ObserverDecorator
 
 
 class Event(Enum):
@@ -57,15 +57,15 @@ class Kitchen():
 res = []
 
 
-class TestObserverAdapter(unittest.TestCase):
+class TestObserverDecorator(unittest.TestCase):
 
-    def test_observer_adapter(self):
+    def test_observer_decorator(self):
         global res
-        study_room = ObserverAdapter(StudyRoom())
-        living_room = ObserverAdapter(LivingRoom())
-        school = ObserverAdapter(School())
-        emergency_alart = NotifierAdapter(EmergencyAlart())
-        kitchen = NotifierAdapter(Kitchen())
+        study_room = ObserverDecorator(StudyRoom())
+        living_room = ObserverDecorator(LivingRoom())
+        school = ObserverDecorator(School())
+        emergency_alart = NotifierDecorator(EmergencyAlart())
+        kitchen = NotifierDecorator(Kitchen())
 
         study_room.attach_notifier(emergency_alart)
         living_room.attach_notifier(emergency_alart)

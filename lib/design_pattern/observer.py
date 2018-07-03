@@ -1,13 +1,13 @@
 """
 How to use observer:
 
-1. Decorate your observed-class with the ObserverAdapter class,
+1. Decorate your observed-class with the ObserverDecorator class,
    which observe some notifier.
 
 2. Implement the update member-function in your the observed-class
    which will be passed only one parameter: event and no return.
 
-3. Decorate your notified-class with the NotifierAdapter class,
+3. Decorate your notified-class with the NotifierDecorator class,
    which notify each observer you registered.
 
 
@@ -36,10 +36,10 @@ example:
 
 
     def main():
-        emergency_center = NotifierAdapter(EmergencyCenter())
-        weather_center = NotifierAdapter(WeatherCenter())
-        my_phone = ObserverAdapter(Phone())
-        my_home_weather_app = ObserverAdapter(App())
+        emergency_center = NotifierDecorator(EmergencyCenter())
+        weather_center = NotifierDecorator(WeatherCenter())
+        my_phone = ObserverDecorator(Phone())
+        my_home_weather_app = ObserverDecorator(App())
 
         emergency_center.attach_observer(my_phone)
         my_home_weather_app.attach_notifier(weather_center)
@@ -53,7 +53,7 @@ note:
 """
 
 
-class ObserverAdapter():
+class ObserverDecorator():
     def __init__(self, base):
         self._notifiers = {}
         self._base = base
@@ -63,13 +63,13 @@ class ObserverAdapter():
 
     def attach_notifier(self, notifier):
         """
-        notifier: NotifierAdapter-liked instance
+        notifier: NotifierDecorator-liked instance
         """
         self._notifiers[notifier] = notifier.attach_observer(self)
 
     def detach_notifier(self, notifier):
         """
-        notifier: NotifierAdapter-liked instance
+        notifier: NotifierDecorator-liked instance
         """
         notifier.detach_observer(self._notifiers[notifier])
         del self._notifiers[notifier]
@@ -82,7 +82,7 @@ class ObserverAdapter():
         return self._base.update(event)
 
 
-class NotifierAdapter():
+class NotifierDecorator():
 
     def __init__(self, base):
         self._observers = {}
@@ -93,7 +93,7 @@ class NotifierAdapter():
 
     def attach_observer(self, observer):
         """
-        observer: ObserverAdapter-liked instance
+        observer: ObserverDecorator-liked instance
         return: int
                 identify the observer
         """

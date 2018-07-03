@@ -1,6 +1,6 @@
 import unittest
 
-from lib.tree import Node, BinaryTree, BinaryTreeSearchingAdapter
+from lib.tree import Node, BinaryTree, BinaryTreeSearchingDecorator
 
 
 """
@@ -48,24 +48,24 @@ binary_tree.insert(n18)
 binary_tree.insert(n19)
 
 
-class TestTreeSearchingAdapter(unittest.TestCase):
+class TestTreeSearchingDecorator(unittest.TestCase):
 
-    def test_adapter(self):
+    def test_decorator(self):
         # visit to BinaryTree's property
-        BinaryTreeSearchingAdapter(empty_binary_tree).root
+        BinaryTreeSearchingDecorator(empty_binary_tree).root
 
     def test_minimum(self):
         self.assertEqual(
-            BinaryTreeSearchingAdapter(empty_binary_tree).minimum(),
+            BinaryTreeSearchingDecorator(empty_binary_tree).minimum(),
             None)
         self.assertEqual(
-            BinaryTreeSearchingAdapter(binary_tree).minimum(),
+            BinaryTreeSearchingDecorator(binary_tree).minimum(),
             n2)
 
     def test_maximum(self):
         self.assertEqual(
-            BinaryTreeSearchingAdapter(empty_binary_tree).maximum(),
+            BinaryTreeSearchingDecorator(empty_binary_tree).maximum(),
             None)
         self.assertEqual(
-            BinaryTreeSearchingAdapter(binary_tree).maximum(),
+            BinaryTreeSearchingDecorator(binary_tree).maximum(),
             n19)
