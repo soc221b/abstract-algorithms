@@ -6,7 +6,7 @@ class Node():
         self._right = None
 
 
-class BalanceNode():
+class BalanceNodeDecorator():
 
     def __init__(self, node):
         self._node = node
@@ -17,7 +17,7 @@ class BalanceNode():
         return getattr(self._node, name)
 
 
-class ParentNode():
+class ParentNodeDecorator():
 
     def __init__(self, node):
         self._node = node

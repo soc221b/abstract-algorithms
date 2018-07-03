@@ -66,7 +66,8 @@ class TestTreeTraverseDecorator(unittest.TestCase):
 
     def test_pre_order_traversal(self):
         self.assertEqual(
-            BinaryTreeTraverseDecorator(empty_binary_tree).pre_order_traversal(),
+            BinaryTreeTraverseDecorator(
+                empty_binary_tree).pre_order_traversal(),
             [])
         self.assertEqual(
             BinaryTreeTraverseDecorator(binary_tree).pre_order_traversal(),
@@ -76,7 +77,8 @@ class TestTreeTraverseDecorator(unittest.TestCase):
 
     def test_in_order_traversal(self):
         self.assertEqual(
-            BinaryTreeTraverseDecorator(empty_binary_tree).in_order_traversal(),
+            BinaryTreeTraverseDecorator(
+                empty_binary_tree).in_order_traversal(),
             [])
         self.assertEqual(
             BinaryTreeTraverseDecorator(binary_tree).in_order_traversal(),

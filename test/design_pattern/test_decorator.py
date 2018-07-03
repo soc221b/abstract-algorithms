@@ -1,6 +1,10 @@
 import unittest
 
-from lib.design_pattern.decorator import Node, BalanceNode, ParentNode
+from lib.design_pattern.decorator import (
+    Node,
+    BalanceNodeDecorator,
+    ParentNodeDecorator
+)
 
 
 class TestNode(unittest.TestCase):
@@ -18,7 +22,7 @@ class TestNode(unittest.TestCase):
             print(node._parent)
 
     def test_balance_node(self):
-        node = BalanceNode(Node(123))
+        node = BalanceNodeDecorator(Node(123))
         print(node._value)
         print(node._left)
         print(node._right)
@@ -28,7 +32,7 @@ class TestNode(unittest.TestCase):
             print(node._parent)
 
     def test_parent_node(self):
-        node = ParentNode(Node(123))
+        node = ParentNodeDecorator(Node(123))
         print(node._value)
         print(node._left)
         print(node._right)
@@ -39,7 +43,7 @@ class TestNode(unittest.TestCase):
             print(node._height)
 
     def test_parent_balance_node(self):
-        node = ParentNode(BalanceNode(Node(123)))
+        node = ParentNodeDecorator(BalanceNodeDecorator(Node(123)))
         print(node._value)
         print(node._left)
         print(node._right)
