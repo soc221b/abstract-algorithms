@@ -51,15 +51,13 @@ note:
 1. you can attach a notifier to an observer by itself
    or attach an observer to a notifier.
 """
+from lib.design_pattern import Decorator
 
 
-class ObserverDecorator():
+class ObserverDecorator(Decorator):
     def __init__(self, base):
+        super().__init__(base)
         self._notifiers = {}
-        self._base = base
-
-    def __getattr__(self, name):
-        return getattr(self._base, name)
 
     def attach_notifier(self, notifier):
         """
@@ -79,17 +77,14 @@ class ObserverDecorator():
         """
         event: object
         """
-        return self._base.update(event)
+        return self.decorated_class.update(event)
 
 
-class NotifierDecorator():
+class NotifierDecorator(Decorator):
 
     def __init__(self, base):
+        super().__init__(base)
         self._observers = {}
-        self._base = base
-
-    def __getattr__(self, name):
-        return getattr(self._base, name)
 
     def attach_observer(self, observer):
         """
