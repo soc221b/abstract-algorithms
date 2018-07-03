@@ -50,6 +50,10 @@ binary_tree.insert(n19)
 
 class TestTreeTraverseAdapter(unittest.TestCase):
 
+    def test_adapter(self):
+        # visit to BinaryTree's property
+        BinaryTreeTraverseAdapter(empty_binary_tree).root
+
     def test_level_traversal(self):
         self.assertEqual(
             BinaryTreeTraverseAdapter(empty_binary_tree).level_traversal(),

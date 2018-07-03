@@ -23,13 +23,14 @@ class BinaryTreeTraverseAdapter():
                        given one parameter which is a node,
                        return right node of it.
         """
+        self.__binary_tree = binary_tree
         self.__root = binary_tree.root
         self.__value_closure = kwargs.get('value_closure', self_closure)
         self.__left_closure = kwargs.get('left_closure', left_closure)
         self.__right_closure = kwargs.get('right_closure', right_closure)
 
     def __getattr__(self, name):
-        return getattr(self.__tree, name)
+        return getattr(self.__binary_tree, name)
 
     def level_traversal(self):
         """
