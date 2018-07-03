@@ -5,6 +5,7 @@ from lib.tree.node_common_closure import (
 )
 from lib.util.common_closure import (
     self_closure,
+    is_none_closure,
 )
 
 
@@ -28,6 +29,7 @@ class BinaryTreeTraverseAdapter():
         self.__value_closure = kwargs.get('value_closure', self_closure)
         self.__left_closure = kwargs.get('left_closure', left_closure)
         self.__right_closure = kwargs.get('right_closure', right_closure)
+        self.__is_none_closure = kwargs.get('is_none_closure', is_none_closure)
 
     def __getattr__(self, name):
         return getattr(self.__binary_tree, name)
@@ -41,14 +43,16 @@ class BinaryTreeTraverseAdapter():
         que1 = Queue()
         que2 = Queue()
 
-        if self.__root is not None:
+        if not self.__is_none_closure(self.__root):
             que1.push(self.__root)
             while not que1.is_empty():
                 while not que1.is_empty():
                     peek = que1.peek()
-                    if (peek is not None and
-                        (self.__left_closure(peek) is not None or
-                         self.__right_closure(peek) is not None)):
+                    if (not self.__is_none_closure(peek) and
+                        (not self.__is_none_closure(self.__left_closure(
+                            peek)) or
+                         not self.__is_none_closure(self.__right_closure(
+                            peek)))):
                         que2.push(self.__left_closure(peek))
                         que2.push(self.__right_closure(peek))
                     nodes.append(self.__value_closure(peek))
@@ -63,15 +67,16 @@ class BinaryTreeTraverseAdapter():
                 list of what returned by the value_closure
         """
         nodes = []
-        if self.__root is not None:
+        if not self.__is_none_closure(self.__root):
             return self.__pre_order_traversal(self.__root, nodes)
         else:
             return nodes
 
     def __pre_order_traversal(self, root, nodes):
-        root_is_not_none_and_has_child = root is not None and (
-            self.__left_closure(root) is not None or
-            self.__right_closure(root) is not None)
+        root_is_not_none_and_has_child = (
+            not self.__is_none_closure(root) and (
+             not self.__is_none_closure(self.__left_closure(root)) or
+             not self.__is_none_closure(self.__right_closure(root))))
 
         nodes.append(self.__value_closure(root))
         if root_is_not_none_and_has_child:
@@ -89,15 +94,16 @@ class BinaryTreeTraverseAdapter():
                 list of what returned by the value_closure
         """
         nodes = []
-        if self.__root is not None:
+        if not self.__is_none_closure(self.__root):
             return self.__in_order_traversal(self.__root, nodes)
         else:
             return nodes
 
     def __in_order_traversal(self, root, nodes):
-        root_is_not_none_and_has_child = root is not None and (
-            self.__left_closure(root) is not None or
-            self.__right_closure(root) is not None)
+        root_is_not_none_and_has_child = (
+            not self.__is_none_closure(root) and (
+             not self.__is_none_closure(self.__left_closure(root)) or
+             not self.__is_none_closure(self.__right_closure(root))))
 
         if root_is_not_none_and_has_child:
             nodes = self.__in_order_traversal(
@@ -115,15 +121,16 @@ class BinaryTreeTraverseAdapter():
                 list of what returned by the value_closure
         """
         nodes = []
-        if self.__root is not None:
+        if not self.__is_none_closure(self.__root):
             return self.__post_order_traversal(self.__root, nodes)
         else:
             return nodes
 
     def __post_order_traversal(self, root, nodes):
-        root_is_not_none_and_has_child = root is not None and (
-            self.__left_closure(root) is not None or
-            self.__right_closure(root) is not None)
+        root_is_not_none_and_has_child = (
+            not self.__is_none_closure(root) and (
+             not self.__is_none_closure(self.__left_closure(root)) or
+             not self.__is_none_closure(self.__right_closure(root))))
 
         if root_is_not_none_and_has_child:
             nodes = self.__post_order_traversal(

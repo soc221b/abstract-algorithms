@@ -6,6 +6,7 @@ from lib.tree.node_common_closure import (
     less_closure
 )
 from lib.util.comparison_closure import Comparison
+from lib.util.common_closure import is_none_closure
 
 
 class BinaryTree():
@@ -26,6 +27,7 @@ class BinaryTree():
                                          Comparison(less_closure).less_closure)
         self.__left_closure = kwargs.get('left_closure', left_closure)
         self.__right_closure = kwargs.get('right_closure', right_closure)
+        self.__is_none_closure = kwargs.get('is_none_closure', is_none_closure)
 
         self.__root = None
 
@@ -38,7 +40,7 @@ class BinaryTree():
         return self.__root
 
     def __insert_to_root(self, node, root):
-        if root is None:
+        if self.__is_none_closure(root):
             root = node
         else:
             if self.__less_closure(node, root):
