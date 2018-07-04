@@ -47,7 +47,8 @@ class TestSort(unittest.TestCase):
     def __test_sort_in_range(self, sort, range_, **kwargs):
         self.__test_sort_in_range_default(sort, range_, **kwargs)
         self.__test_sort_in_range_with_custom_less(sort, range_, **kwargs)
-        self.__test_sort_in_range_with_custom_swap(sort, range_, **kwargs)
+        self.__test_sort_in_range_with_custom_swap_only_property(
+            sort, range_, **kwargs)
 
     def __test_sort_in_range_default(self, sort, range_, **kwargs):
         for size in range_:
@@ -72,14 +73,18 @@ class TestSort(unittest.TestCase):
             else:
                 self.assertListEqualByKey(sort_list, actual, lambda x: x[1])
 
-    def __test_sort_in_range_with_custom_swap(self, sort, range_, **kwargs):
+    def __test_sort_in_range_with_custom_swap_only_property(
+            self, sort, range_, **kwargs):
         for size in range_:
             sort_list = sorted(self.__get_random_embedded_node(size),
                                key=lambda x: x.value)
             actual = []
-            for n in sort_list:
-                actual.append(n.copy())
+            for node in sort_list:
+                actual.append(node.copy())
             actual = self.__shuffle_list(actual)
+            # test no-effect step1: append id to each node as its index of list
+            for index in range(len(actual)):
+                actual[index].id = index
             kwargs['swap_closure'] = swap_node_value
             kwargs['less_closure'] = lambda a, b: a.value < b.value
             sort(actual, **kwargs)
@@ -88,6 +93,9 @@ class TestSort(unittest.TestCase):
                     sort_list[::-1], actual, lambda x: x.value)
             else:
                 self.assertListEqualByKey(sort_list, actual, lambda x: x.value)
+            # test no-effect step2: test node is not exchanged
+            for index, node in enumerate(actual):
+                self.assertEqual(index, node.id)
 
     def assertListEqualByKey(self, list1, list2, key_closure):
         self.assertEqual(len(list1), len(list2))
@@ -162,6 +170,12 @@ class InfoNodeDecorator(Decorator):
     @id.setter
     def id(self, id_):
         self.__id = id_
+
+    def copy(self):
+        copied_node = self.decorated_class.copy()
+        copied_node = InfoNodeDecorator(copied_node)
+        copied_node.id = self.__id
+        return copied_node
 
 
 def swap_node_value(iterative, index_a, index_b):
