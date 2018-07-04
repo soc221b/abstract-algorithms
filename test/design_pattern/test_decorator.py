@@ -30,42 +30,42 @@ class TestNode(unittest.TestCase):
 
     def test_node(self):
         node = Node(123)
-        print(node._value)
-        print(node._left)
-        print(node._right)
+        node._value
+        node._left
+        node._right
         with self.assertRaises(AttributeError):
-            print(node._balance)
+            node._balance
         with self.assertRaises(AttributeError):
-            print(node._height)
+            node._height
         with self.assertRaises(AttributeError):
-            print(node._parent)
+            node._parent
 
     def test_balance_node(self):
         node = BalanceNodeDecorator(Node(123))
-        print(node._value)
-        print(node._left)
-        print(node._right)
-        print(node._balance)
-        print(node._height)
+        node._value
+        node._left
+        node._right
+        node._balance
+        node._height
         with self.assertRaises(AttributeError):
-            print(node._parent)
+            node._parent
 
     def test_parent_node(self):
         node = ParentNodeDecorator(Node(123))
-        print(node._value)
-        print(node._left)
-        print(node._right)
-        print(node._parent)
+        node._value
+        node._left
+        node._right
+        node._parent
         with self.assertRaises(AttributeError):
-            print(node._balance)
+            node._balance
         with self.assertRaises(AttributeError):
-            print(node._height)
+            node._height
 
     def test_parent_balance_node(self):
         node = ParentNodeDecorator(BalanceNodeDecorator(Node(123)))
-        print(node._value)
-        print(node._left)
-        print(node._right)
-        print(node._parent)
-        print(node._balance)
-        print(node._height)
+        node._value
+        node._left
+        node._right
+        node._parent
+        node._balance
+        node._height
