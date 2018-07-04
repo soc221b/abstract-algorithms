@@ -36,3 +36,10 @@ class TestNode(unittest.TestCase):
         right_node = Node(r)
         node.right = right_node
         self.assertEqual(node.right, right_node)
+
+    def test_copy(self):
+        r = random()
+        node1 = Node(r)
+        node2 = node1.copy()
+        node1.value = r * -1 + 1
+        self.assertNotEqual(node1.value, node2.value)

@@ -27,3 +27,9 @@ class Node():
     @value.setter
     def value(self, x):
         self.__value = x
+
+    def copy(self):
+        copied_node = Node(self.__value)
+        copied_node.left = self.__left
+        copied_node.right = self.__right
+        return copied_node
