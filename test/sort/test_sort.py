@@ -28,6 +28,7 @@ class TestSort(unittest.TestCase):
 
     def __test_n_log_n_complexity_sort(self, sort):
         self.__test_n_square_complexity_sort(sort)
+        self.__test_sort_in_large_size(sort)
 
     def __test_sort_reversed(self, sort):
         self.__test_sort_boundary(sort)
