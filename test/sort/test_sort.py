@@ -52,8 +52,9 @@ class TestSort(unittest.TestCase):
 
     def __test_sort_in_range_default(self, sort, range_, **kwargs):
         for size in range_:
-            sort_list = sorted(self.__get_random_list(size))
-            actual = self.__shuffle_list(sort_list[:])
+            shuffle_list = self.__get_random_list(size)
+            sort_list = sorted(shuffle_list)
+            actual = shuffle_list
             sort(actual, **kwargs)
             if kwargs.get('reversed', False) is True:
                 self.assertEqual(sort_list[::-1], actual)
@@ -62,9 +63,9 @@ class TestSort(unittest.TestCase):
 
     def __test_sort_in_range_with_custom_less(self, sort, range_, **kwargs):
         for size in range_:
-            sort_list = sorted(self.__get_random_embedded_list(size),
-                               key=lambda x: x[1])
-            actual = self.__shuffle_list(sort_list[:])
+            shuffle_list = self.__get_random_embedded_list(size)
+            sort_list = sorted(shuffle_list, key=lambda x: x[1])
+            actual = shuffle_list
             kwargs['less_closure'] = lambda a, b: a[1] < b[1]
             sort(actual, **kwargs)
             if kwargs.get('reversed', False) is True:
@@ -76,12 +77,11 @@ class TestSort(unittest.TestCase):
     def __test_sort_in_range_with_custom_swap_only_property(
             self, sort, range_, **kwargs):
         for size in range_:
-            sort_list = sorted(self.__get_random_embedded_node(size),
-                               key=lambda x: x.value)
+            shuffle_list = self.__get_random_embedded_node(size)
+            sort_list = sorted(shuffle_list, key=lambda x: x.value)
             actual = []
-            for node in sort_list:
+            for node in shuffle_list:
                 actual.append(node.copy())
-            actual = self.__shuffle_list(actual)
             # test no-effect step1: append id to each node as its index of list
             for index in range(len(actual)):
                 actual[index].id = index
@@ -148,12 +148,6 @@ class TestSort(unittest.TestCase):
                     list_.append(InfoNodeDecorator(Node(randint(0, size))))
                     if random() < 0.5:
                         break
-        return list_
-
-    def __shuffle_list(self, list_):
-        for i in range(len(list_)):
-            j = randint(0, len(list_) - 1)
-            list_[i], list_[j] = list_[j], list_[i]
         return list_
 
 
