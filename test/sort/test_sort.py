@@ -8,6 +8,12 @@ from lib.sort import (
 )
 from lib.tree import Node
 from lib.design_pattern import Decorator
+from test.helper import (
+    assertListEqualByKey,
+    get_random_list,
+    get_random_embedded_list,
+    get_random_embedded_node,
+)
 
 
 class TestSort(unittest.TestCase):
@@ -52,7 +58,7 @@ class TestSort(unittest.TestCase):
 
     def __test_sort_in_range_default(self, sort, range_, **kwargs):
         for size in range_:
-            shuffle_list = self.__get_random_list(size)
+            shuffle_list = get_random_list(size)
             sort_list = sorted(shuffle_list)
             actual = shuffle_list
             sort(actual, **kwargs)
@@ -63,21 +69,21 @@ class TestSort(unittest.TestCase):
 
     def __test_sort_in_range_with_custom_less(self, sort, range_, **kwargs):
         for size in range_:
-            shuffle_list = self.__get_random_embedded_list(size)
+            shuffle_list = get_random_embedded_list(size)
             sort_list = sorted(shuffle_list, key=lambda x: x[1])
             actual = shuffle_list
             kwargs['less_closure'] = lambda a, b: a[1] < b[1]
             sort(actual, **kwargs)
             if kwargs.get('reversed', False) is True:
-                self.assertListEqualByKey(
-                    sort_list[::-1], actual, lambda x: x[1])
+                assertListEqualByKey(
+                    self, sort_list[::-1], actual, lambda x: x[1])
             else:
-                self.assertListEqualByKey(sort_list, actual, lambda x: x[1])
+                assertListEqualByKey(self, sort_list, actual, lambda x: x[1])
 
     def __test_sort_in_range_with_custom_swap_only_property(
             self, sort, range_, **kwargs):
         for size in range_:
-            shuffle_list = self.__get_random_embedded_node(size)
+            shuffle_list = get_random_embedded_node(size)
             sort_list = sorted(shuffle_list, key=lambda x: x.value)
             actual = []
             for node in shuffle_list:
@@ -89,87 +95,14 @@ class TestSort(unittest.TestCase):
             kwargs['less_closure'] = lambda a, b: a.value < b.value
             sort(actual, **kwargs)
             if kwargs.get('reversed', False) is True:
-                self.assertListEqualByKey(
-                    sort_list[::-1], actual, lambda x: x.value)
+                assertListEqualByKey(
+                    self, sort_list[::-1], actual, lambda x: x.value)
             else:
-                self.assertListEqualByKey(sort_list, actual, lambda x: x.value)
+                assertListEqualByKey(
+                    self, sort_list, actual, lambda x: x.value)
             # test no-effect step2: test node is not exchanged
             for index, node in enumerate(actual):
                 self.assertEqual(index, node.id)
-
-    def assertListEqualByKey(self, list1, list2, key_closure):
-        self.assertEqual(len(list1), len(list2))
-        for i in range(len(list1)):
-            self.assertEqual(key_closure(list1[i]), key_closure(list2[i]))
-
-    def __get_random_list(self, size):
-        """
-        size: int
-        return: list[int]
-        """
-        list_ = []
-        while len(list_) < size:
-            # continuous
-            if random() < 0.5:
-                # duplicate
-                while True and len(list_) < size:
-                    list_.append(randint(0, size))
-                    if random() < 0.5:
-                        break
-        return list_
-
-    def __get_random_embedded_list(self, size):
-        """
-        size: int
-        return: list[list[int]]
-        """
-        list_ = []
-        while len(list_) < size:
-            # continuous
-            if random() < 0.5:
-                # duplicate
-                while True and len(list_) < size:
-                    list_.append([randint(0, size), randint(0, size)])
-                    if random() < 0.5:
-                        break
-        return list_
-
-    def __get_random_embedded_node(self, size):
-        """
-        size: int
-        return: list[Node]
-        """
-        list_ = []
-        while len(list_) < size:
-            # continuous
-            if random() < 0.5:
-                # duplicate
-                while True and len(list_) < size:
-                    list_.append(InfoNodeDecorator(Node(randint(0, size))))
-                    if random() < 0.5:
-                        break
-        return list_
-
-
-class InfoNodeDecorator(Decorator):
-
-    def __init__(self, base):
-        super().__init__(base)
-        self.__id = None
-
-    @property
-    def id(self):
-        return self.__id
-
-    @id.setter
-    def id(self, id_):
-        self.__id = id_
-
-    def copy(self):
-        copied_node = self.decorated_class.copy()
-        copied_node = InfoNodeDecorator(copied_node)
-        copied_node.id = self.__id
-        return copied_node
 
 
 def swap_node_value(iterative, index_a, index_b):
