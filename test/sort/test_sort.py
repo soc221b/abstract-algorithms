@@ -9,6 +9,7 @@ from lib.sort import (
 from lib.tree import Node
 from lib.design_pattern import Decorator
 
+
 class TestSort(unittest.TestCase):
 
     def test_bubble_sort(self):
