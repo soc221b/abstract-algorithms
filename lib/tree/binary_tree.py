@@ -23,8 +23,9 @@ class BinaryTree():
                        given one parameter which is a node,
                        return right node of it.
         """
-        self.__less_closure = kwargs.get('less_closure',
-                                         Comparison(less_closure).less_closure)
+        self.__less_closure = kwargs.get(
+            'less_closure',
+            Comparison(less_closure=less_closure).less_closure)
         self.__left_closure = kwargs.get('left_closure', left_closure)
         self.__right_closure = kwargs.get('right_closure', right_closure)
         self.__is_none_closure = kwargs.get('is_none_closure', is_none_closure)
