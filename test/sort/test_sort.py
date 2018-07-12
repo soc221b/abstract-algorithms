@@ -1,11 +1,13 @@
 import unittest
+from random import random, randint
 
 from lib.sort import (
     insertion_sort,
     selection_sort,
     bubble_sort,
 )
-
+from lib.tree import Node
+from lib.design_pattern import Decorator
 
 class TestSort(unittest.TestCase):
 
