@@ -4,8 +4,8 @@ def less_closure(a, b):
 
 class Comparison():
 
-    def __init__(self, less_closure=less_closure):
-        self.__less_closure = less_closure
+    def __init__(self, **kwargs):
+        self.__less_closure = kwargs.get("less_closure", less_closure)
 
     def less_closure(self, a, b):
         return self.__less_closure(a, b)
