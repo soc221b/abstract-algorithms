@@ -5,7 +5,11 @@ def less_closure(a, b):
 class Comparison():
 
     def __init__(self, **kwargs):
-        self.__less_closure = kwargs.get("less_closure", less_closure)
+        less = kwargs.get('less_closure', None)
+        if less is None:
+            self.__less_closure = less_closure
+        else:
+            self.__less_closure = less
 
     def less_closure(self, a, b):
         return self.__less_closure(a, b)
