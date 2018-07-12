@@ -1,1 +1,1 @@
-from binary_search import binary_search
+from lib.search.binary_search.binary_search import binary_search
