@@ -2,10 +2,7 @@ import unittest
 from lib.search.binary_search import binary_search
 from lib.search.linear_search import linear_search
 from util.helper import (
-    assertListEqualByKey,
     get_random_list,
-    get_random_embedded_list,
-    get_random_embedded_node,
 )
 
 
