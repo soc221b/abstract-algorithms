@@ -12,7 +12,8 @@ from lib.util.common_closure import is_none_closure
 class BinaryTree():
 
     def __init__(self, *,
-                 less_closure=Comparison(less_closure=less_closure).less_closure,
+                 less_closure=(
+                    Comparison(less_closure=less_closure).less_closure),
                  left_closure=left_closure,
                  ight_closure=right_closure,
                  is_none_closure=is_none_closure):
