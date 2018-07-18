@@ -32,8 +32,8 @@ class TestSort(unittest.TestCase):
 
     def __test_sort_reversed(self, sort):
         self.__test_sort_boundary(sort)
-        self.__test_sort_boundary(sort, reversed=True)
-        self.__test_sort_boundary(sort, reversed=False)
+        self.__test_sort_boundary(sort, reverse=True)
+        self.__test_sort_boundary(sort, reverse=False)
 
     def __test_sort_boundary(self, sort, **kwargs):
         self.__test_sort_in_range(sort, range(0, 10**1), **kwargs)
@@ -56,7 +56,7 @@ class TestSort(unittest.TestCase):
             sort_list = sorted(shuffle_list)
             actual = shuffle_list
             sort(actual, **kwargs)
-            if kwargs.get('reversed', False) is True:
+            if kwargs.get('reverse', False) is True:
                 self.assertEqual(sort_list[::-1], actual)
             else:
                 self.assertEqual(sort_list, actual)
@@ -68,7 +68,7 @@ class TestSort(unittest.TestCase):
             actual = shuffle_list
             kwargs['less_closure'] = lambda a, b: a[1] < b[1]
             sort(actual, **kwargs)
-            if kwargs.get('reversed', False) is True:
+            if kwargs.get('reverse', False) is True:
                 self.assertListEqualByKey(
                     sort_list[::-1], actual, lambda x: x[1])
             else:
@@ -88,7 +88,7 @@ class TestSort(unittest.TestCase):
             kwargs['swap_closure'] = swap_node_value
             kwargs['less_closure'] = lambda a, b: a.value < b.value
             sort(actual, **kwargs)
-            if kwargs.get('reversed', False) is True:
+            if kwargs.get('reverse', False) is True:
                 self.assertListEqualByKey(
                     sort_list[::-1], actual, lambda x: x.value)
             else:

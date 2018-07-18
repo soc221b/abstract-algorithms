@@ -11,7 +11,11 @@ from lib.util.common_closure import (
 
 class BinaryTreeTraverseDecorator():
 
-    def __init__(self, binary_tree, **kwargs):
+    def __init__(self, binary_tree, *,
+                 value_closure=self_closure,
+                 left_closure=left_closure,
+                 right_closure=right_closure,
+                 is_none_closure=is_none_closure):
         """
         binary_tree: BinaryTree-liked type
         value_closure: function, optional
@@ -26,10 +30,10 @@ class BinaryTreeTraverseDecorator():
         """
         self.__binary_tree = binary_tree
         self.__root = binary_tree.root
-        self.__value_closure = kwargs.get('value_closure', self_closure)
-        self.__left_closure = kwargs.get('left_closure', left_closure)
-        self.__right_closure = kwargs.get('right_closure', right_closure)
-        self.__is_none_closure = kwargs.get('is_none_closure', is_none_closure)
+        self.__value_closure = self_closure
+        self.__left_closure = left_closure
+        self.__right_closure = right_closure
+        self.__is_none_closure = is_none_closure
 
     def __getattr__(self, name):
         return getattr(self.__binary_tree, name)

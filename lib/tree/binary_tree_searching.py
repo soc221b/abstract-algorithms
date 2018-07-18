@@ -7,15 +7,15 @@ from lib.util.common_closure import is_none_closure
 
 class BinaryTreeSearchingDecorator():
 
-    def __init__(self, binary_tree, **kwargs):
+    def __init__(self, binary_tree, *,
+                 smaller_side_closure=smaller_side_closure,
+                 larger_side_closure=larger_side_closure,
+                 is_none_closure=is_none_closure):
         self.__binary_tree = binary_tree
         self.__root = binary_tree.root
-        self.__smaller_side_closure = kwargs.get(
-            'smaller_side_closure', smaller_side_closure)
-        self.__larger_side_closure = kwargs.get(
-            'larger_side_closure', larger_side_closure)
-        self.__is_none_closure = kwargs.get(
-            'is_none_closure', is_none_closure)
+        self.__smaller_side_closure = smaller_side_closure
+        self.__larger_side_closure = larger_side_closure
+        self.__is_none_closure = is_none_closure
 
     def __getattr__(self, name):
         return getattr(self.__binary_tree, name)

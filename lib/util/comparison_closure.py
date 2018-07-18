@@ -1,10 +1,12 @@
-def less_closure(a, b):
+def less_closure_default(a, b):
     return a < b
 
 
 class Comparison():
 
-    def __init__(self, less_closure=less_closure):
+    def __init__(self, *, less_closure=less_closure_default):
+        if less_closure is None:
+            less_closure = less_closure_default
         self.__less_closure = less_closure
 
     def less_closure(self, a, b):

@@ -11,7 +11,11 @@ from lib.util.common_closure import is_none_closure
 
 class BinaryTree():
 
-    def __init__(self, **kwargs):
+    def __init__(self, *,
+                 less_closure=Comparison(less_closure=less_closure).less_closure,
+                 left_closure=left_closure,
+                 ight_closure=right_closure,
+                 is_none_closure=is_none_closure):
         """
         less_closure: function
                       given two parameters which type is node's type,
@@ -23,11 +27,10 @@ class BinaryTree():
                        given one parameter which is a node,
                        return right node of it.
         """
-        self.__less_closure = kwargs.get('less_closure',
-                                         Comparison(less_closure).less_closure)
-        self.__left_closure = kwargs.get('left_closure', left_closure)
-        self.__right_closure = kwargs.get('right_closure', right_closure)
-        self.__is_none_closure = kwargs.get('is_none_closure', is_none_closure)
+        self.__less_closure = less_closure
+        self.__left_closure = left_closure
+        self.__right_closure = right_closure
+        self.__is_none_closure = is_none_closure
 
         self.__root = None
 

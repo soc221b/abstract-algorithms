@@ -29,7 +29,27 @@ Example:
 """
 
 
-def n_sum(n, nums, target, **kv):
+def sum_closure_default(a, b):
+    return a + b
+
+
+def compare_closure_default(num, taget):
+    if num < taget:
+        return -1
+    elif num > taget:
+        return 1
+    else:
+        return 0
+
+
+def same_closure_default(a, b):
+    return a == b
+
+
+def n_sum(n, nums, target, *,
+          sum_closure=sum_closure_default,
+          same_closure=same_closure_default,
+          compare_closure=compare_closure_default):
     """
     n: int
     nums: list[object]
@@ -47,20 +67,6 @@ def n_sum(n, nums, target, **kv):
     1. type of sum_closure's return should be same as type
        of compare_closure's first param
     """
-
-    def sum_closure_default(a, b):
-        return a + b
-
-    def compare_closure_default(num, taget):
-        if num < taget:
-            return -1
-        elif num > taget:
-            return 1
-        else:
-            return 0
-
-    def same_closure_default(a, b):
-        return a == b
 
     def n_sum(n, nums, target):
         if n == 2:
@@ -124,8 +130,5 @@ def n_sum(n, nums, target, **kv):
 
         return results
 
-    sum_closure = kv.get('sum_closure', sum_closure_default)
-    same_closure = kv.get('same_closure', same_closure_default)
-    compare_closure = kv.get('compare_closure', compare_closure_default)
     nums.sort()
     return n_sum(n, nums, target)
