@@ -14,38 +14,54 @@ How to use observer:
 example:
 
     class Phone():
+        def __init__(self, name):
+            self.__name = name
 
         def update(self, event):
-            if event == "earthquake warning":
-                print("I need to run away.")
-
+            if event == "Earthquake warning":
+                print("{0} need(s) to run away.".format(self.__name))
 
     class App():
+        def __init__(self, name):
+            self.__name = name
 
         def update(self, event):
-            if event == "it will rain":
-                print("I need to buy an umbrella.")
-
+            if event == "It will rain":
+                print("{0} alert: you need to buy an umbrella.".format(self.__name))
 
     class EmergencyCenter():
         pass
 
-
     class WeatherCenter():
         pass
 
-
     def main():
+        # Add observer to center object
         emergency_center = NotifierDecorator(EmergencyCenter())
+        my_phone = Phone("Lily")
+        sam_s_phone = Phone("Sam")
+
+        emergency_center.attach_observer(ObserverDecorator(my_phone))
+        emergency_center.attach_observer(ObserverDecorator(sam_s_phone))
+
+        emergency_center.notify("Earthquake warning")
+
+        # or you could attach notifier via decorator itself
         weather_center = NotifierDecorator(WeatherCenter())
-        my_phone = ObserverDecorator(Phone())
-        my_home_weather_app = ObserverDecorator(App())
+        built_in_weather_app = ObserverDecorator(App("Built-in weather app"))
+        third_party_weather_app = ObserverDecorator(App("Another weather app"))
 
-        emergency_center.attach_observer(my_phone)
-        my_home_weather_app.attach_notifier(weather_center)
+        built_in_weather_app.attach_notifier(weather_center)
+        third_party_weather_app.attach_notifier(weather_center)
 
-        emergency_center.notify("earthquake warning")
-        weather_center.notify("it will rain")
+        weather_center.notify("It will rain")
+
+    """OUTPUT
+    Lily need(s) to run away.
+    Sam need(s) to run away.
+    Built-in weather app alert: you need to buy an umbrella.
+    Another weather app alert: you need to buy an umbrella.
+    """
 
 note:
 1. you can attach a notifier to an observer by itself
