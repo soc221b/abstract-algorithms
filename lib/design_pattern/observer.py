@@ -56,12 +56,11 @@ example:
 
         weather_center.notify("It will rain")
 
-    """OUTPUT
+    ### OUTPUT
     Lily need(s) to run away.
     Sam need(s) to run away.
     Built-in weather app alert: you need to buy an umbrella.
     Another weather app alert: you need to buy an umbrella.
-    """
 
 note:
 1. you can attach a notifier to an observer by itself
