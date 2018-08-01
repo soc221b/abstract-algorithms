@@ -27,7 +27,8 @@ example:
 
         def update(self, event):
             if event == "It will rain":
-                print("{0} alert: you need to buy an umbrella.".format(self.__name))
+                print("{0} alert: you need to buy an umbrella.".format(
+                    self.__name))
 
     class EmergencyCenter():
         pass
