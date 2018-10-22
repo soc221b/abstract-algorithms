@@ -20,29 +20,26 @@ class ListNode():
 class Stack():
 
     def __init__(self):
-        self.__peek = None
+        self.__peek_node = None
         self.__len = 0
 
     # O(1)
     def push(self, x):
-        elem = ListNode(x)
         self.__len += 1
-        if self.is_empty:
-            self.__peek = elem
-        else:
-            elem.next = self.__peek
-            self.__peek = elem
+        new_peek_node = ListNode(x)
+        new_peek_node.next = self.__peek_node
+        self.__peek_node = new_peek_node
 
     # O(1)
     def pop(self):
-        peek = self.peek()
         self.__len -= 1
-        self.__peek = self.__peek.next
-        return peek
+        old_peek_node = self.__peek_node
+        self.__peek_node = self.__peek_node.next
+        return old_peek_node.var
 
     # O(1)
     def peek(self):
-        return self.__peek
+        return self.__peek_node.var
 
     # O(1)
     def is_empty(self):
@@ -51,16 +48,16 @@ class Stack():
     # O(n)
     def reverse(self):
         if not self.is_empty():
-            peek = self.__peek
-            next = self.__peek.next
-            peek.next = None  # peek is last elem
-            while next is not None:
-                temp = next.next
-                next.next = peek
-                peek = next
-                next = temp
+            peek_node = self.__peek_node
+            next_node = self.__peek_node.next
+            peek_node.next = None  # peek is last elem
+            while next_node is not None:
+                temp = next_node.next
+                next_node.next = peek
+                peek_node = next_node
+                next_node = temp
 
-            self.__peek = peek
+            self.__peek_node = peek_node
 
     # O(1)
     def size(self):
@@ -69,11 +66,12 @@ class Stack():
     # O(n)
     def copy(self):
         copied = Stack()
-        peek = self.__peek
-        while peek is not None:
-            next = peek.next
-            copied.push(ListNode(peek.var))
-            peek = next
+        peek_node = self.__peek_node
+        while peek_node is not None:
+            copied_node = ListNode(peek_node.var)
+            next_node = peek_node.next
+            peek_node = next_node
+            copied.push(copied_node)
 
         copied.reverse()
 
