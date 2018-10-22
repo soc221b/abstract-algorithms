@@ -1,35 +1,85 @@
+class ListNode():
+
+    def __init__(self, var, next=None):
+        self.__var = var
+        self.__next = next
+
+    @property
+    def var(self):
+        return self.__var
+
+    @property
+    def next(self):
+        return self.__next
+
+    @next.setter
+    def next(self, next):
+        self.__next = next
+
+
 class Stack():
 
     def __init__(self):
-        self.__array = []
+        self.__peek = None
+        self.__len = 0
 
+    # O(1)
     def push(self, x):
-        self.__array.append(x)
+        elem = ListNode(x)
+        self.__len += 1
+        if self.is_empty:
+            self.__peek = elem
+        else:
+            elem.next = self.__peek
+            self.__peek = elem
 
+    # O(1)
     def pop(self):
         peek = self.peek()
-        del self.__array[-1]
+        self.__len -= 1
+        self.__peek = self.__peek.next
         return peek
 
+    # O(1)
     def peek(self):
-        return self.__array[-1]
+        return self.__peek
 
+    # O(1)
     def is_empty(self):
-        return len(self.__array) == 0
+        return self.__len == 0
 
+    # O(n)
     def reverse(self):
-        self.__array = self.__array[::-1]
+        if not self.is_empty():
+            peek = self.__peek
+            next = self.__peek.next
+            peek.next = None  # peek is last elem
+            while next is not None:
+                temp = next.next
+                next.next = peek
+                peek = next
+                next = temp
 
+            self.__peek = peek
+
+    # O(1)
     def size(self):
-        return len(self.__array)
+        return self.__len
 
+    # O(n)
     def copy(self):
-        copied_stack = Stack()
-        for v in self.__array:
-            copied_stack.push(v)
-        return copied_stack
+        copied = Stack()
+        peek = self.__peek
+        while peek is not None:
+            next = peek.next
+            copied.push(ListNode(peek.var))
+            peek = next
 
+        copied.reverse()
 
+        return copied
+
+# O(n)
 def reversed_stack(stk):
     copied_stack = stk.copy()
     copied_stack.reverse()
