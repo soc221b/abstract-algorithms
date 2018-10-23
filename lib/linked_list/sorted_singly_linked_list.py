@@ -4,10 +4,6 @@ from lib.linked_list import SinglyLinkedList
 
 class SortedSinglyLinkedList(SinglyLinkedList):
 
-    def __init__(self):
-        super().__init__()
-        raise NotImplementedError  # no tested
-
     # O(n)
     def insert(self, x):
         new_node = ListNode(x)
