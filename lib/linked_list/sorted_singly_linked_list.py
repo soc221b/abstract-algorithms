@@ -19,7 +19,7 @@ class SortedSinglyLinkedList(SinglyLinkedList):
 
     # O(n)
     def find_smaller_than(self, x):
-        prev = self._SinglyLinkedList__head
+        prev = self.__head
         while prev.next is not None and prev.next.var < x:
             prev = self.successor(prev)
         return prev
@@ -29,7 +29,7 @@ class SortedSinglyLinkedList(SinglyLinkedList):
         if self.is_empty():
             raise KeyError
         else:
-            return self._SinglyLinkedList__head.next
+            return self.__head.next
 
     # O(1)
     def maximum(self):
