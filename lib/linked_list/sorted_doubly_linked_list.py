@@ -29,7 +29,7 @@ class SortedDoublyLinkedList():
     def find_smaller_than(self, x):
         prev = self.__head
         while (self.successor(prev) is not None
-               and self.successor(rev).var < x):
+               and self.successor(prev).var < x):
             prev = self.successor(prev)
         return prev
 
