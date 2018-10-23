@@ -1,8 +1,7 @@
 from lib.linked_list import DoublyListNode as ListNode
-from lib.linked_list import DoublyLinkedList
 
 
-class SortedDoublyLinkedList(DoublyLinkedList):
+class SortedDoublyLinkedList():
 
     def __init__(self):
         self.__head = ListNode(0)
