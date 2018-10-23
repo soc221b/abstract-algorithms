@@ -8,6 +8,13 @@ class SinglyLinkedList():
         self.__tail = self.__head
         self.__len = 0
 
+    # O(n)
+    def search(self, x):
+        curr = self.__head.next
+        while curr is not None and curr.var != x:
+            curr = self.successor(curr)
+        return curr
+
     # O(1)
     def insert(self, x):
         new_node = ListNode(x)
