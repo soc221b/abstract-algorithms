@@ -70,10 +70,9 @@ class Stack():
         copied = Stack()
         peek_node = self.__peek_node
         while peek_node is not None:
-            copied_node = ListNode(peek_node.var)
-            next_node = peek_node.next
-            peek_node = next_node
-            copied.push(copied_node)
+            copied_var = peek_node.var
+            peek_node = peek_node.next
+            copied.push(copied_var)
 
         copied.reverse()
 
