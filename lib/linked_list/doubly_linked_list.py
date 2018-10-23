@@ -1,8 +1,7 @@
 from lib.linked_list import DoublyListNode as ListNode
-from lib.linked_list import SinglyLinkedList
 
 
-class DoublyLinkedList(SinglyLinkedList):
+class DoublyLinkedList():
 
     def __init__(self):
         self.__head = ListNode(0)
@@ -35,3 +34,48 @@ class DoublyLinkedList(SinglyLinkedList):
     # O(1)
     def predecessor(self, node):
         return node.prev
+
+    # O(n)
+    def search(self, x):
+        curr = self.__head.next
+        while curr is not None and curr.var != x:
+            curr = self.successor(curr)
+        return curr
+
+    # O(1)
+    def successor(self, node):
+        # no verification for node whether it in this list or not.
+        return node.next
+
+    # O(1)
+    def __len__(self):
+        return self.__len
+
+    # O(1)
+    def is_empty(self):
+        return self.__len == 0
+
+    # O(n)
+    def minimumn(self):
+        return self.__minmax(is_max=True)
+
+    # O(n)
+    def maximum(self):
+        return self.__minmax(is_min=True)
+
+    # O(n)
+    def __minmax(self, *, is_min=False, is_max=False):
+        if self.is_empty():
+            raise KeyError
+        else:
+            curr = self.__head.next
+            minmax = curr
+            while curr.next is not None:
+                curr = curr.next
+                if is_min:
+                    minmax = minmax if minmax.var < curr.var else curr
+                elif is_max:
+                    minmax = minmax if minmax.var > curr.var else curr
+                else:
+                    raise RuntimeError
+            return minmax
