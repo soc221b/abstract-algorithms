@@ -108,7 +108,7 @@ class TestLinkedList(unittest.TestCase):
             for _ in range(0, 100):
                 self.assertEqual(len(ns) == 0, ll.is_empty())
                 if random > 0.6:
-                    r = rand
+                    r = random()
                     ll.insert(r)
                     ns.append(r)
                 if random > 0.4 and len(ns) != 0:
