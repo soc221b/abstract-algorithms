@@ -44,6 +44,10 @@ class SinglyLinkedList():
             raise KeyError
 
     # O(1)
+    def size(self):
+        return self.__len
+
+    # O(1)
     def is_empty(self):
         return self.__len == 0
 
