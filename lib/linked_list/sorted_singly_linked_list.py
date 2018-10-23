@@ -10,17 +10,23 @@ class SortedSinglyLinkedList(SinglyLinkedList):
     # O(n)
     def insert(self, x):
         new_node = ListNode(x)
-        if self.is_empty():
-            self.__head.next = new_node
+        prev = self.find_small_than(x)
+        if prev == self.__tail:
+            prev.next = new_node
             self.__tail = new_node
         else:
-            curr = self.__head
-            while curr is not None and curr.next.var < x:
-                curr = curr.next
-            new_node.next = curr.next
-            curr.next = new_node
+            new_node.next = prev.next
+            prev.next = new_node
         self.__len += 1
         return new_node
+
+    # O(n)
+    def find_small_than(self, x):
+        prev = self.__head
+        while (prev.next is not None
+               and prev.next.var < x):
+            prev = self.successor(prev)
+        return prev
 
     # O(1)
     def minimumn(self):
