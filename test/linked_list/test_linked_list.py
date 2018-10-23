@@ -109,11 +109,11 @@ class TestLinkedList(unittest.TestCase):
             ns = []
             for _ in range(0, 100):
                 self.assertEqual(len(ns) == 0, ll.is_empty())
-                if random > 0.6:
+                if random() > 0.6:
                     r = random()
                     ll.insert(r)
                     ns.append(r)
-                if random > 0.4 and len(ns) != 0:
+                if random() > 0.4 and len(ns) != 0:
                     ll.delete(ll.search(ns[0]))
                     del ns[0]
 
