@@ -4,11 +4,6 @@ from lib.linked_list import SinglyLinkedList
 
 class SortedSinglyLinkedList(SinglyLinkedList):
 
-    def __init__(self):
-        self.__head = ListNode(0)
-        self.__tail = self.__head
-        self.__len = 0
-
     # O(n)
     def insert(self, x):
         new_node = ListNode(x)
@@ -24,7 +19,7 @@ class SortedSinglyLinkedList(SinglyLinkedList):
 
     # O(n)
     def find_smaller_than(self, x):
-        prev = self.__head
+        prev = self._SinglyLinkedList__head
         while prev.next is not None and prev.next.var < x:
             prev = self.successor(prev)
         return prev
@@ -34,7 +29,7 @@ class SortedSinglyLinkedList(SinglyLinkedList):
         if self.is_empty():
             raise KeyError
         else:
-            return self.__head.next
+            return self._SinglyLinkedList__head.next
 
     # O(1)
     def maximum(self):
