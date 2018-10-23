@@ -1,6 +1,7 @@
 from lib.linked_list import SinglyListNode as ListNode
 from lib.linked_list import SinglyLinkedList
 
+
 class SortedSinglyLinkedList(SinglyLinkedList):
 
     def __init__(self):
@@ -23,8 +24,7 @@ class SortedSinglyLinkedList(SinglyLinkedList):
     # O(n)
     def find_smaller_than(self, x):
         prev = self.__head
-        while (prev.next is not None
-               and prev.next.var < x):
+        while prev.next is not None and prev.next.var < x:
             prev = self.successor(prev)
         return prev
 
