@@ -63,8 +63,8 @@ class TestLinkedList(unittest.TestCase):
         for linked_list in linked_lists:
             ll = linked_list()
             ns = [n for n in range(0, 300)]
-            random_ns = shuffle(is)
-            for n in sns:
+            random_ns = shuffle(ns)
+            for n in random_ns:
                 ll.insert(n)
 
             self.assertEqual(ll.predecessor(ll.search(ns[0])), None)
