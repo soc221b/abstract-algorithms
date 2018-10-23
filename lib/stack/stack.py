@@ -25,16 +25,16 @@ class Stack():
 
     # O(1)
     def push(self, x):
-        self.__len += 1
         new_peek_node = ListNode(x)
         new_peek_node.next = self.__peek_node
         self.__peek_node = new_peek_node
+        self.__len += 1
 
     # O(1)
     def pop(self):
-        self.__len -= 1
         old_peek_node = self.peek()
         self.__peek_node = self.__peek_node.next
+        self.__len -= 1
         return old_peek_node.var
 
     # O(1)
