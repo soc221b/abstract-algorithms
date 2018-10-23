@@ -17,7 +17,7 @@ class SortedDoublyLinkedList():
             new_node.prev = prev
             self.__tail = new_node
         else:
-            next = prev.next
+            next = self.successor(prev)
             new_node.prev = prev
             new_node.next = next
             prev.next = new_node
@@ -28,12 +28,13 @@ class SortedDoublyLinkedList():
     # O(n)
     def find_smaller_than(self, x):
         prev = self.__head
-        while prev.next is not None and prev.next.var < x:
+        while (self.successor(prev) is not None
+               and self.successor(rev).var < x):
             prev = self.successor(prev)
         return prev
 
     # O(1)
-    def minimumn(self):
+    def minimum(self):
         if self.is_empty():
             raise KeyError
         else:
