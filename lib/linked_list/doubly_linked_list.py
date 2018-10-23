@@ -25,9 +25,6 @@ class DoublyLinkedList(SinglyLinkedList):
         if self.size() == 1:
             self.__head.next = None
             self.__tail = self.__head
-        elif predecessor is None:  # the node is first node
-            self.__head = successor
-            successor.prev = None
         elif successor is None:  # the node is last node
             self.__tail = predecessor
             predecessor.next = None
