@@ -78,6 +78,7 @@ class Stack():
 
         return copied
 
+
 # O(n)
 def reversed_stack(stk):
     copied_stack = stk.copy()
