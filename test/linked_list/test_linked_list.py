@@ -45,7 +45,7 @@ class TestLinkedList(unittest.TestCase):
                 except Error:
                     self.fail()
 
-    def test_predecessor_for_unsorted(self, node):
+    def test_predecessor_for_unsorted(self):
         for linked_list in linked_lists:
             ll = linked_list()
             random_ns = [r for r in randint(0, 300)]
@@ -59,7 +59,7 @@ class TestLinkedList(unittest.TestCase):
                 self.assertEqual(ll.predecessor(curr), prev)
                 prev = curr
 
-    def test_predecessor_for_sorted(self, node):
+    def test_predecessor_for_sorted(self):
         for linked_list in linked_lists:
             ll = linked_list()
             ns = [n for n in range(0, 300)]
@@ -73,7 +73,7 @@ class TestLinkedList(unittest.TestCase):
                 curr = ll.search(ns[index + 1])
                 self.assertEqual(ll.predecessor(curr), prev)
 
-    def test_successor_for_unsorted(self, node):
+    def test_successor_for_unsorted(self):
         for linked_list in unsorted_linked_lists:
             ll = linked_list()
             random_ns = [r for r in randint(0, 300)]
@@ -87,7 +87,7 @@ class TestLinkedList(unittest.TestCase):
                 self.assertEqual(ll.successor(curr), next)
                 next = curr
 
-    def test_successor_for_sorted(self, node):
+    def test_successor_for_sorted(self):
         for linked_list in sorted_linked_lists:
             ll = linked_list()
             ns = [n for n in range(0, 300)]
