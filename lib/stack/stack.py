@@ -39,6 +39,8 @@ class Stack():
 
     # O(1)
     def peek(self):
+        if self.is_empty():
+            raise IndexError
         return self.__peek_node.var
 
     # O(1)
@@ -53,7 +55,7 @@ class Stack():
             peek_node.next = None  # peek is last elem
             while next_node is not None:
                 temp = next_node.next
-                next_node.next = peek
+                next_node.next = peek_node
                 peek_node = next_node
                 next_node = temp
 
