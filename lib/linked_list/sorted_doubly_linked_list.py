@@ -63,7 +63,10 @@ class SortedDoublyLinkedList():
 
     # O(1)
     def predecessor(self, node):
-        return node.prev
+        if node.prev is self.__head:
+            return None
+        else:
+            return node.prev
 
     # O(n)
     def search(self, x):
