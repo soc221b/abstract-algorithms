@@ -17,6 +17,7 @@ class SortedDoublyLinkedList():
             new_node.prev = prev
             self.__tail = new_node
         else:
+            next = prev.next
             new_node.prev = prev
             new_node.next = next
             prev.next = new_node
