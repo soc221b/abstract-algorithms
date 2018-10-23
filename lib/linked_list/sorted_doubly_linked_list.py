@@ -4,6 +4,11 @@ from lib.linked_list import DoublyLinkedList
 
 class SortedDoublyLinkedList(DoublyLinkedList):
 
+    def __init__(self):
+        self.__head = ListNode(0)
+        self.__tail = self.__head
+        self.__len = 0
+
     # O(n)
     def insert(self, x):
         new_node = ListNode(x)
