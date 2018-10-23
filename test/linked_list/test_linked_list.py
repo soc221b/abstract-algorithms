@@ -125,7 +125,7 @@ class TestLinkedList(unittest.TestCase):
                 sorted_ns = sorted(random_ns)
                 for n in random_ns:
                     ll.insert(n)
-                self.assertEqual(ll.minimum(), sorted_ns[0])
+                self.assertEqual(ll.minimum().var, sorted_ns[0])
 
     def test_maximum(self):
         for linked_list in linked_lists:
@@ -135,4 +135,4 @@ class TestLinkedList(unittest.TestCase):
                 sorted_ns = sorted(random_ns)
                 for n in random_ns:
                     ll.insert(n)
-                self.assertEqual(ll.maximum(), sorted_ns[-1])
+                self.assertEqual(ll.maximum().var, sorted_ns[-1])
