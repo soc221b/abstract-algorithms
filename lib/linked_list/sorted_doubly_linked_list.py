@@ -8,8 +8,7 @@ class SortedDoublyLinkedList(DoublyLinkedList):
     def insert(self, x):
         new_node = ListNode(x)
         prev = self.find_smaller_than(x)
-        if (self.is_empty()
-            or prev == self.__tail):
+        if self.is_empty() or prev == self.__tail:
             prev.next = new_node
             new_node.prev = prev
             self.__tail = new_node
@@ -24,8 +23,7 @@ class SortedDoublyLinkedList(DoublyLinkedList):
     # O(n)
     def find_smaller_than(self, x):
         prev = self.__head
-        while (prev.next is not None
-               and prev.next.var < x):
+        while prev.next is not None and prev.next.var < x):
             prev = self.successor(prev)
         return prev
 
