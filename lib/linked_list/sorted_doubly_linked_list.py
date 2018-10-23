@@ -49,7 +49,7 @@ class SortedDoublyLinkedList():
     def delete(self, node):
         predecessor = self.predecessor(node)
         successor = self.successor(node)
-        if self.size() == 1:
+        if len(self) == 1:
             self.__head.next = None
             self.__tail = self.__head
         elif successor is None:  # the node is last node
