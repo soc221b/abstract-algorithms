@@ -1,7 +1,5 @@
 from lib.linked_list.list_node import SinglyListNode, DoublyListNode
-from lib.linked_list.singly_linked_list import (
-    SinglyLinkedList,
-    SortedSinglyLinkedList,
-    DoublyLinkedList,
-    SortedDoublyLinkedList
-)
+from lib.linked_list.singly_linked_list import SinglyLinkedList
+from lib.linked_list.sorted_singly_linked_list import SortedSinglyLinkedList
+from lib.linked_list.doubly_linked_list import DoublyLinkedList
+from lib.linked_list.sorted_doubly_linked_list import SortedDoublyLinkedList
