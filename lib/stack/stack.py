@@ -33,7 +33,7 @@ class Stack():
     # O(1)
     def pop(self):
         self.__len -= 1
-        old_peek_node = self.__peek_node
+        old_peek_node = self.peek()
         self.__peek_node = self.__peek_node.next
         return old_peek_node.var
 
