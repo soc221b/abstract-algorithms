@@ -48,7 +48,7 @@ class TestLinkedList(unittest.TestCase):
     def test_predecessor_for_unsorted(self):
         for linked_list in linked_lists:
             ll = linked_list()
-            random_ns = [r for r in randint(0, 300)]
+            random_ns = [random() for _ in range(0, 300)]
             for n in random_ns:
                 ll.insert(n)
 
@@ -63,7 +63,8 @@ class TestLinkedList(unittest.TestCase):
         for linked_list in linked_lists:
             ll = linked_list()
             ns = [n for n in range(0, 300)]
-            random_ns = shuffle(ns)
+            random_ns = ns[:]
+            shuffle(random_ns)
             for n in random_ns:
                 ll.insert(n)
 
@@ -76,7 +77,7 @@ class TestLinkedList(unittest.TestCase):
     def test_successor_for_unsorted(self):
         for linked_list in unsorted_linked_lists:
             ll = linked_list()
-            random_ns = [r for r in randint(0, 300)]
+            random_ns = [random() for _ in range(0, 300)]
             for n in random_ns:
                 ll.insert(n)
 
@@ -91,7 +92,8 @@ class TestLinkedList(unittest.TestCase):
         for linked_list in sorted_linked_lists:
             ll = linked_list()
             ns = [n for n in range(0, 300)]
-            random_ns = shuffle(ns)
+            random_ns = ns[:]
+            shuffle(random_ns)
             for n in random_ns:
                 ll.insert(n)
 
