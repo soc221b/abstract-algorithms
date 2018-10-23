@@ -1,20 +1,4 @@
-class ListNode():
-
-    def __init__(self, var, next=None):
-        self.__var = var
-        self.__next = next
-
-    @property
-    def var(self):
-        return self.__var
-
-    @property
-    def next(self):
-        return self.__next
-
-    @next.setter
-    def next(self, next):
-        self.__next = next
+from lib.linked_list import SinglyListNode as ListNode
 
 
 class Stack():
