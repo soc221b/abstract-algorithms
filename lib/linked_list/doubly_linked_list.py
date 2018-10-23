@@ -8,7 +8,6 @@ class DoublyLinkedList(SinglyLinkedList):
         self.__head = ListNode(0)
         self.__tail = self.__head
         self.__len = 0
-        raise NotImplementedError  # no tested
 
     # O(1)
     def insert(self, x):
