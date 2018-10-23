@@ -24,7 +24,7 @@ class SortedSinglyLinkedList():
         return prev
 
     # O(1)
-    def minimumn(self):
+    def minimum(self):
         if self.is_empty():
             raise KeyError
         else:
