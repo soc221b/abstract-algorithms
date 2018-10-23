@@ -1,6 +1,6 @@
 class SinglyListNode():
 
-    def __init__(self, var, next=None):
+    def __init__(self, var, *, next=None):
         self.__var = var
         self.__next = next
 
@@ -19,7 +19,7 @@ class SinglyListNode():
 
 class DoublyListNode():
 
-    def __init__(self, var, prev=None, next=None):
+    def __init__(self, var, *, prev=None, next=None):
         self.__var = var
         self.__prev = prev
         self.__next = next
