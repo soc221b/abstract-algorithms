@@ -60,14 +60,15 @@ class TestLinkedList(unittest.TestCase):
         self.__test_is_empty(SortedDoublyLinkedList)
 
     def __test_insert(self, linked_list):
-        ll = linked_list()
-        count = 0
-        for _ in range(0, 1000):
-            count += 1
-            r = random()
-            node = ll.insert(r)
-            self.assertEqual(node.var, r)
-            self.assertEqual(len(ll), count)
+        for _ in range(0, 100):
+            ll = linked_list()
+            count = 0
+            for _ in range(0, 100):
+                count += 1
+                r = random()
+                node = ll.insert(r)
+                self.assertEqual(node.var, r)
+                self.assertEqual(len(ll), count)
 
     def __test_delete_for_one_node(self, linked_list):
         # dependent methods: insert
