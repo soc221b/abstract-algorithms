@@ -1,32 +1,51 @@
+from lib.linked_list import SinglyListNode as ListNode
+
+
 class Queue():
 
     def __init__(self):
-        self.__array = []
+        self.__head_node = ListNode(0)
+        self.__tail_node = self.__head_node
+        self.__len = 0
 
     def push(self, x):
-        self.__array.append(x)
+        new_node = ListNode(x)
+        self.__tail_node.next = new_node
+        self.__tail_node = new_node
+        self.__len += 1
 
     def pop(self):
-        peek = self.peek()
-        del self.__array[0]
-        return peek
+        peek_node = self.__head_node.next
+        self.__head_node.next = peek_node.next()
+        self.__len -= 1
+        return peek_node.var
 
     def peek(self):
-        return self.__array[0]
+        return self.__head_node.next.var
 
     def is_empty(self):
-        return len(self.__array) == 0
+        return len(self) == 0
 
     def reverse(self):
-        self.__array = self.__array[::-1]
+        if not self.is_empty():
+            head_node = self.__head_node
+            new_second_node = None
+            while head_node.next.next is not None:
+                old_peek_node = head_node.next
+                old_second_node = head_node.next.next
+                old_peek_node.next = new_second_node
+                head_node.next = old_second_node
+                new_second_node = old_peek_node
+            head_node.next.next = new_second_node
 
-    def size(self):
-        return len(self.__array)
+    def __len__(self):
+        return self.__len
 
     def copy(self):
         copied_queue = Queue()
-        for v in self.__array:
-            copied_queue.push(v)
+        peek_node = self.__peek_node.next
+        while peek_node is not None:
+            copied_queue.push(peek.var)
         return copied_queue
 
 
