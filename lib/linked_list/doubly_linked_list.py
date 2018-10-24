@@ -8,6 +8,13 @@ class DoublyLinkedList():
         self.__tail = self.__head
         self.__len = 0
 
+    # O(n)
+    def search(self, x):
+        curr = self.__head.next
+        while curr is not None and curr.var != x:
+            curr = self.successor(curr)
+        return curr
+
     # O(1)
     def insert(self, x):
         new_node = ListNode(x, prev=self.__tail)
@@ -30,33 +37,6 @@ class DoublyLinkedList():
             predecessor.next = successor
             successor.prev = predecessor
         self.__len -= 1
-
-    # O(1)
-    def predecessor(self, node):
-        if node.prev is self.__head:
-            return None
-        else:
-            return node.prev
-
-    # O(n)
-    def search(self, x):
-        curr = self.__head.next
-        while curr is not None and curr.var != x:
-            curr = self.successor(curr)
-        return curr
-
-    # O(1)
-    def successor(self, node):
-        # no verification for node whether it in this list or not.
-        return node.next
-
-    # O(1)
-    def __len__(self):
-        return self.__len
-
-    # O(1)
-    def is_empty(self):
-        return self.__len == 0
 
     # O(n)
     def minimumn(self):
@@ -82,3 +62,23 @@ class DoublyLinkedList():
                 else:
                     raise RuntimeError
             return minmax
+
+    # O(1)
+    def successor(self, node):
+        # no verification for node whether it in this list or not.
+        return node.next
+
+    # O(1)
+    def predecessor(self, node):
+        if node.prev is self.__head:
+            return None
+        else:
+            return node.prev
+
+    # O(1)
+    def __len__(self):
+        return self.__len
+
+    # O(1)
+    def is_empty(self):
+        return self.__len == 0
