@@ -65,6 +65,7 @@ class SortedDoublyLinkedList():
             head = self.__head.next
             while head is not None:
                 logging.info(head.var)
+                head = head.next
             return self.__head.next
 
     # O(1)
@@ -75,6 +76,7 @@ class SortedDoublyLinkedList():
             head = self.__head.next
             while head is not None:
                 logging.info(head.var)
+                head = head.next
             return self.__tail
 
     # O(1)
