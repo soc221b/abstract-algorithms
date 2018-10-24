@@ -39,7 +39,7 @@ class DoublyLinkedList():
         self.__len -= 1
 
     # O(n)
-    def minimumn(self):
+    def minimum(self):
         return self.__minmax(is_min=True)
 
     # O(n)
