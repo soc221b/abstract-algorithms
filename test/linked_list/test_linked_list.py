@@ -127,8 +127,8 @@ class TestLinkedList(unittest.TestCase):
 
     def __test_minimum(self, linked_list):
         # dependent methods: insert
-        ll = linked_list()
         for _ in range(0, 100):
+            ll = linked_list()
             sorted_ns = []
             r = random()
             for _ in range(0, 100):
@@ -146,8 +146,8 @@ class TestLinkedList(unittest.TestCase):
 
     def __test_maximum(self, linked_list):
         # dependent methods: insert
-        ll = linked_list()
         for _ in range(0, 100):
+            ll = linked_list()
             sorted_ns = []
             r = random()
             for _ in range(0, 100):
