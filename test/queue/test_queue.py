@@ -81,10 +81,10 @@ class TestQueue(unittest.TestCase):
         random_values = get_random_values()
         for i, v in enumerate(random_values):
             que.push(v)
-            self.assertEqual(que.size(), i + 1)
+            self.assertEqual(len(que), i + 1)
         for i in range(len(random_values)):
             que.pop()
-            self.assertEqual(que.size(), len(random_values) - i - 1)
+            self.assertEqual(len(que), len(random_values) - i - 1)
 
     def test_queue_copy(self):
         que = Queue()
