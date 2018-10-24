@@ -124,7 +124,7 @@ class TestLinkedList(unittest.TestCase):
     def __test_minimum(self, ll):
         for _ in range(0, 100):
             sorted_ns = [n for n in range(0, 300)]
-            random_ns = ns[:]
+            random_ns = sorted_ns[:]
             shuffle(random_ns)
             for n in random_ns:
                 ll.insert(n)
@@ -133,7 +133,7 @@ class TestLinkedList(unittest.TestCase):
     def __test_maximum(self, ll):
         for _ in range(0, 100):
             sorted_ns = [n for n in range(0, 300)]
-            random_ns = ns[:]
+            random_ns = sorted_ns[:]
             shuffle(random_ns)
             for n in random_ns:
                 ll.insert(n)
