@@ -79,21 +79,26 @@ class TestLinkedList(unittest.TestCase):
             self.assertIsNot(ll.search(r), None)
 
     def __test_delete_for_one_node(self, linked_list):
-        # dependent methods: insert
+        # dependent methods: insert, search
         ll = linked_list()
-        node = ll.insert(random())
+        r = random()
+        node = ll.insert(r)
+        self.assertIsNot(ll.search(r), None)
         try:
             ll.delete(node)
         except Exception:
             self.fail()
 
     def __test_delete_for_last_node_for_unsorted(self, linked_list):
-        # dependent methods: insert
+        # dependent methods: insert, search
         ll = linked_list()
         ll.insert(random())
+        self.assertIsNot(ll.search(r), None)
         for _ in range(0, 1000):
             while True:
-                node = ll.insert(random())
+                r = random()
+                node = ll.insert(r)
+                self.assertIsNot(ll.search(r), None)
                 if random() > 0.5:
                     break
             try:
@@ -102,14 +107,16 @@ class TestLinkedList(unittest.TestCase):
                 self.fail()
 
     def __test_delete_for_last_node_for_sorted(self, linked_list):
-        # dependent methods: insert
+        # dependent methods: insert, search
         ll = linked_list()
         r = random()
         ll.insert(r)
+        self.assertIsNot(ll.search(r), None)
         for _ in range(0, 1000):
             while True:
                 r += random()
                 node = ll.insert(r)
+                self.assertIsNot(ll.search(r), None)
                 if random() > 0.5:
                     break
             try:
@@ -118,10 +125,12 @@ class TestLinkedList(unittest.TestCase):
                 self.fail()
 
     def __test_delete_general(self, linked_list):
-        # dependent methods: insert
+        # dependent methods: insert, search
         ll = linked_list()
         for _ in range(0, 1000):
-            node = ll.insert(random())
+            r = random()
+            node = ll.insert()
+            self.assertIsNot(ll.search(r), None)
             if random() > 0.3:
                 try:
                     ll.delete(node)
