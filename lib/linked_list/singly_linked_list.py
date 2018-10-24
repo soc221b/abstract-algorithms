@@ -70,12 +70,19 @@ class SinglyLinkedList():
         while prev.next is not None and prev.next != node:
             prev = prev.next
         if prev.next is None:
+            logging.warning("__prev")
+            logging.warning(prev)
+            logging.warning(prev.var)
+            logging.warning(prev.next)
+            logging.warning(node)
+            logging.warning(node.var)
             if self.is_empty():
                 logging.warning("empty")
             head = self.__head.next
             while head is not None:
                 logging.warning(head.var)
                 head = head.next
+            logging.warning("__prev")
             raise IndexError
         else:
             return prev
