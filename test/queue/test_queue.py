@@ -26,11 +26,10 @@ class TestQueue(unittest.TestCase):
     def test_queue_push(self):
         que = Queue()
         random_values = get_random_values()
-        for v in random_values:
+        for (i, v) in enumerate(random_values):
             que.push(v)
-            self.assertEqual(que.is_empty(), False)
-            self.assertEqual(que.peek(), v)
-            self.assertEqual(que.pop(), v)
+            self.assertEqual(len(que), i + 1)
+            self.assertEqual(que.peek(), random_values[0])
 
     def test_queue_pop(self):
         que = Queue()
