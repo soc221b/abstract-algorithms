@@ -13,25 +13,27 @@ class TestLinkedList(unittest.TestCase):
 
     def test_signly_linked_list(self):
         self.__test_unsorted(SinglyLinkedList)
+        self.__test_general(SinglyLinkedList)
 
     def test_sorted_signly_linked_list(self):
         self.__test_sorted(SortedSinglyLinkedList)
+        self.__test_general(SortedSinglyLinkedList)
 
     def test_doubly_linked_list(self):
         self.__test_unsorted(DoublyLinkedList)
+        self.__test_general(DoublyLinkedList)
 
     def test_sorted_doubly_linked_list(self):
         self.__test_sorted(SortedDoublyLinkedList)
+        self.__test_general(SortedDoublyLinkedList)
 
     def __test_unsorted(self, linked_list):
         self.__test_predecessor_for_unsorted(linked_list())
         self.__test_successor_for_unsorted(linked_list())
-        self.__test_general(linked_list())
 
     def __test_sorted(self, linked_list):
         self.__test_predecessor_for_sorted(linked_list())
         self.__test_successor_for_sorted(linked_list())
-        self.__test_general(linked_list())
 
     def __test_general(self, linked_list):
         self.__test_insert(linked_list())
