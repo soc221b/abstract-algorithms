@@ -152,16 +152,16 @@ class TestLinkedList(unittest.TestCase):
 
     def __test_successor_for_sorted(self, linked_list):
         ll = linked_list()
-        ns = [n for n in range(0, 300)]
-        random_ns = ns[:]
+        sorted_ns = [n for n in range(0, 300)]
+        random_ns = sorted_ns[:]
         shuffle(random_ns)
         for n in random_ns:
             ll.insert(n)
 
-        self.assertEqual(ll.successor(ll.search(ns[-1])), None)
-        for index in range(0, len(ns) - 1):
-            curr = ll.search(ns[index])
-            next = ll.search(ns[index + 1])
+        self.assertEqual(ll.successor(ll.search(sorted_ns[-1])), None)
+        for index in range(0, len(sorted_ns) - 1):
+            curr = ll.search(sorted_ns[index])
+            next = ll.search(sorted_ns[index + 1])
             self.assertEqual(ll.successor(curr), next)
 
     def __test_is_empty(self, linked_list):
@@ -174,13 +174,17 @@ class TestLinkedList(unittest.TestCase):
                 ll.insert(r)
                 ns.append(r)
             if random() > 0.4 and len(ns) != 0:
-                ll.delete(ll.search(ns[0]))
-                del ns[0]
+                ll.delete(ll.search(ns[-1]))
+                del ns[-1]
 
     def __test_minimum(self, linked_list):
         ll = linked_list()
         for _ in range(0, 100):
-            sorted_ns = [n for n in range(0, 300)]
+            sorted_ns = []
+            r = random()
+            for _ in range(0, 100):
+                sorted_ns.append(r)
+                r += random()
             random_ns = sorted_ns[:]
             shuffle(random_ns)
             for n in random_ns:
@@ -190,7 +194,11 @@ class TestLinkedList(unittest.TestCase):
     def __test_maximum(self, linked_list):
         ll = linked_list()
         for _ in range(0, 100):
-            sorted_ns = [n for n in range(0, 300)]
+            sorted_ns = []
+            r = random()
+            for _ in range(0, 100):
+                sorted_ns.append(r)
+                r += random()
             random_ns = sorted_ns[:]
             shuffle(random_ns)
             for n in random_ns:
