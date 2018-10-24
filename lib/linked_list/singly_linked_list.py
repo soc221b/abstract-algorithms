@@ -1,3 +1,5 @@
+import logging
+
 from lib.linked_list import SinglyListNode as ListNode
 
 
@@ -68,11 +70,9 @@ class SinglyLinkedList():
         while prev.next is not None and prev.next != node:
             prev = prev.next
         if prev.next is None:
-            print(prev is self.__head)
-            print(prev.var)
-            print(node.var)
-            print(len(self))
-            print(self.search(node.var))
+            head = self.__head.next
+            while head is not None:
+                logging.info(head.var)
             raise IndexError
         else:
             return prev
