@@ -92,7 +92,8 @@ class TestLinkedList(unittest.TestCase):
     def __test_delete_for_last_node_for_unsorted(self, linked_list):
         # dependent methods: insert, search
         ll = linked_list()
-        ll.insert(random())
+        r = random()
+        ll.insert(r)
         self.assertIsNot(ll.search(r), None)
         for _ in range(0, 1000):
             while True:
@@ -129,7 +130,7 @@ class TestLinkedList(unittest.TestCase):
         ll = linked_list()
         for _ in range(0, 1000):
             r = random()
-            node = ll.insert()
+            node = ll.insert(r)
             self.assertIsNot(ll.search(r), None)
             if random() > 0.3:
                 try:
