@@ -43,18 +43,17 @@ class TestLinkedList(unittest.TestCase):
         self.__test_maximum(linked_list())
 
     def __test_insert(self, ll):
-        i = 0
-        for r in range(0, 1000):
-            i += 1
-            r = randint(0, 300)
+        count = 0
+        for _ in range(0, 1000):
+            count += 1
+            r = random()
             node = ll.insert(r)
             self.assertEqual(node.var, r)
-            self.assertEqual(len(ll), i)
+            self.assertEqual(len(ll), count)
 
     def __test_delete(self, ll):
-        for r in range(0, 1000):
-            r = randint(0, 300)
-            node = ll.insert(r)
+        for _ in range(0, 1000):
+            node = ll.insert(random())
             try:
                 ll.delete(node)
             except Exception:
@@ -124,16 +123,18 @@ class TestLinkedList(unittest.TestCase):
 
     def __test_minimum(self, ll):
         for _ in range(0, 100):
-            random_ns = [random() for _ in range(0, 20)]
-            sorted_ns = sorted(random_ns)
+            sorted_ns = [n for n in range(0, 300)]
+            random_ns = ns[:]
+            shuffle(random_ns)
             for n in random_ns:
                 ll.insert(n)
             self.assertEqual(ll.minimum().var, sorted_ns[0])
 
     def __test_maximum(self, ll):
         for _ in range(0, 100):
-            random_ns = [random() for _ in range(0, 20)]
-            sorted_ns = sorted(random_ns)
+            sorted_ns = [n for n in range(0, 300)]
+            random_ns = ns[:]
+            shuffle(random_ns)
             for n in random_ns:
                 ll.insert(n)
             self.assertEqual(ll.maximum().var, sorted_ns[-1])
