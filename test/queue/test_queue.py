@@ -16,7 +16,7 @@ class TestQueue(unittest.TestCase):
 
     def test_queue_init(self):
         que = Queue()
-        self.assertEqual(que.size(), 0)
+        self.assertEqual(len(que), 0)
         self.assertEqual(que.is_empty(), True)
         with self.assertRaises(IndexError):
             que.pop()
@@ -76,7 +76,7 @@ class TestQueue(unittest.TestCase):
             self.assertEqual(que.peek(), v)
             que.pop()
 
-    def test_queue_size(self):
+    def test_queue_len(self):
         que = Queue()
         random_values = get_random_values()
         for i, v in enumerate(random_values):
@@ -95,7 +95,7 @@ class TestQueue(unittest.TestCase):
         for v in random_values:
             self.assertEqual(copied_que.peek(), v)
             copied_que.pop()
-        self.assertEqual(que.size(), len(random_values))
+        self.assertEqual(len(que), len(random_values))
 
 
 class TestQueueHelper(unittest.TestCase):
@@ -109,7 +109,7 @@ class TestQueueHelper(unittest.TestCase):
         for v in random_values[::-1]:
             self.assertEqual(reversed_queue.peek(), v)
             reversed_queue.pop()
-        self.assertEqual(que.size(), len(random_values))
+        self.assertEqual(len(que), len(random_values))
 
     def test_queue_reversed_with_override(self):
         self.assertEqual(list(reversed([123, 456])), [456, 123])
@@ -122,6 +122,6 @@ class TestQueueHelper(unittest.TestCase):
         for v in random_values[::-1]:
             self.assertEqual(reversed_queue.peek(), v)
             reversed_queue.pop()
-        self.assertEqual(que.size(), len(random_values))
+        self.assertEqual(len(que), len(random_values))
 
         self.assertEqual(list(reversed([123, 456])), [456, 123])
