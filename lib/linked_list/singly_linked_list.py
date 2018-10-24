@@ -73,6 +73,7 @@ class SinglyLinkedList():
             head = self.__head.next
             while head is not None:
                 logging.info(head.var)
+                head = head.next
             raise IndexError
         else:
             return prev
