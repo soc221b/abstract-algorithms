@@ -1,5 +1,3 @@
-import logging
-
 from lib.linked_list import SinglyListNode as ListNode
 
 
@@ -48,10 +46,6 @@ class SortedSinglyLinkedList():
         if self.is_empty():
             raise KeyError
         else:
-            head = self.__head.next
-            while head is not None:
-                logging.info(head.var)
-                head = head.next
             return self.__head.next
 
     # O(1)
@@ -59,10 +53,6 @@ class SortedSinglyLinkedList():
         if self.is_empty():
             raise KeyError
         else:
-            head = self.__head.next
-            while head is not None:
-                logging.info(head.var)
-                head = head.next
             return self.__tail
 
     # O(n)
