@@ -1,5 +1,3 @@
-import logging
-
 from lib.linked_list import DoublyListNode as ListNode
 
 
@@ -62,13 +60,6 @@ class SortedDoublyLinkedList():
         if self.is_empty():
             raise KeyError
         else:
-            logging.warning("\nsorted_doubly_linked_list")
-            logging.warning("minimum")
-            head = self.__head.next
-            while head is not None:
-                logging.warning(head.var)
-                head = head.next
-            logging.warning("\nsorted_doubly_linked_list")
             return self.__head.next
 
     # O(1)
@@ -76,13 +67,6 @@ class SortedDoublyLinkedList():
         if self.is_empty():
             raise KeyError
         else:
-            logging.warning("\nsorted_doubly_linked_list")
-            logging.warning("minimum")
-            head = self.__head.next
-            while head is not None:
-                logging.warning(head.var)
-                head = head.next
-            logging.warning("sorted_doubly_linked_list")
             return self.__tail
 
     # O(1)
