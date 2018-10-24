@@ -49,6 +49,7 @@ class Queue():
         peek_node = self.__head_node.next
         while peek_node is not None:
             copied_queue.push(peek_node.var)
+            peek_node = peek_node.next
         return copied_queue
 
 
