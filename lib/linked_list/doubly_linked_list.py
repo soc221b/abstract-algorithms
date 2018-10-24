@@ -25,8 +25,8 @@ class DoublyLinkedList():
 
     # O(1)
     def delete(self, node):
-        predecessor = self.predecessor(node)
-        successor = self.successor(node)
+        predecessor = node.prev
+        successor = node.next
         if len(self) == 1:
             self.__head.next = None
             self.__tail = self.__head
