@@ -12,7 +12,7 @@ class SinglyLinkedList():
     def search(self, x):
         curr = self.__head.next
         while curr is not None and curr.var != x:
-            curr = self.successor(curr)
+            curr = curr.next
         return curr
 
     # O(1)
