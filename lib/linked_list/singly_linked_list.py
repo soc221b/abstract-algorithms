@@ -29,37 +29,6 @@ class SinglyLinkedList():
         prev.next = node.next
         self.__len -= 1
 
-    # O(1)
-    def successor(self, node):
-        # no verification for node whether it in this list or not.
-        return node.next
-
-    # O(n)
-    def predecessor(self, node):
-        prev = self.__prev(node)
-        if prev is self.__head:
-            return None
-        else:
-            return prev
-
-    # O(n)
-    def __prev(self, node):
-        prev = self.__head
-        while prev.next is not None and prev.next != node:
-            prev = prev.next
-        if prev.next is None:
-            raise IndexError
-        else:
-            return prev
-
-    # O(1)
-    def __len__(self):
-        return self.__len
-
-    # O(1)
-    def is_empty(self):
-        return self.__len == 0
-
     # O(n)
     def minimumn(self):
         return self.__minmax(is_max=True)
@@ -84,3 +53,34 @@ class SinglyLinkedList():
                 else:
                     raise RuntimeError
             return minmax
+
+    # O(n)
+    def predecessor(self, node):
+        prev = self.__prev(node)
+        if prev is self.__head:
+            return None
+        else:
+            return prev
+
+    # O(n)
+    def __prev(self, node):
+        prev = self.__head
+        while prev.next is not None and prev.next != node:
+            prev = prev.next
+        if prev.next is None:
+            raise IndexError
+        else:
+            return prev
+
+    # O(1)
+    def successor(self, node):
+        # no verification for node whether it in this list or not.
+        return node.next
+
+    # O(1)
+    def __len__(self):
+        return self.__len
+
+    # O(1)
+    def is_empty(self):
+        return self.__len == 0
