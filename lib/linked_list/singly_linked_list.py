@@ -72,6 +72,7 @@ class SinglyLinkedList():
             print(prev.var)
             print(node.var)
             print(len(self))
+            print(self.search(node.var))
             raise IndexError
         else:
             return prev
