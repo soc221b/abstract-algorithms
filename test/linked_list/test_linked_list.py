@@ -1,5 +1,5 @@
 import unittest
-from random import random, randint, shuffle
+from random import random, shuffle
 
 from lib.linked_list import (
     SinglyLinkedList,
@@ -111,7 +111,6 @@ class TestLinkedList(unittest.TestCase):
     def __test_delete_general(self, linked_list):
         # dependent methods: insert
         ll = linked_list()
-        count = 0
         for _ in range(0, 1000):
             node = ll.insert(random())
             if random() > 0.3:
