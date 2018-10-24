@@ -11,7 +11,7 @@ class Queue():
     def push(self, x):
         new_node = ListNode(x)
         self.__tail_node.next = new_node
-        self.__tail_node = new_node
+        self.__tail_node = self.__tail_node.next
         self.__len += 1
 
     def pop(self):
@@ -19,7 +19,7 @@ class Queue():
             raise IndexError
         else:
             peek_node = self.__head_node.next
-            self.__head_node.next = peek_node.next
+            self.__head_node.next = self.__head_node.next.next
             self.__len -= 1
             return peek_node.var
 
