@@ -1,4 +1,5 @@
 import unittest
+import logging
 from random import random, randint, shuffle
 
 from lib.linked_list import (
@@ -118,6 +119,10 @@ class TestLinkedList(unittest.TestCase):
                 try:
                     ll.delete(node)
                 except Exception:
+                    logging.warning("__test_delete_general")
+                    logging.warning("node.val")
+                    logging.warning(node.val)
+                    logging.warning("__test_delete_general")
                     self.fail()
 
     def __test_minimum(self, linked_list):
@@ -133,6 +138,10 @@ class TestLinkedList(unittest.TestCase):
             shuffle(random_ns)
             for n in random_ns:
                 ll.insert(n)
+            logging.warning("__test_minimum")
+            logging.warning("sorted_ns")
+            logging.warning(sorted_ns)
+            logging.warning("__test_minimum")
             self.assertEqual(ll.minimum().var, sorted_ns[0])
 
     def __test_maximum(self, linked_list):
@@ -148,6 +157,10 @@ class TestLinkedList(unittest.TestCase):
             shuffle(random_ns)
             for n in random_ns:
                 ll.insert(n)
+            logging.warning("__test_minimum")
+            logging.warning("sorted_ns")
+            logging.warning(sorted_ns)
+            logging.warning("__test_minimum")
             self.assertEqual(ll.maximum().var, sorted_ns[-1])
 
     def __test_search(self, linked_list):
