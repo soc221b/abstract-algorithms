@@ -13,7 +13,6 @@ class TestLinkedList(unittest.TestCase):
 
     def test_signly_linked_list(self):
         self.__test_insert(SinglyLinkedList)
-        self.__test_delete_for_unsorted(SinglyLinkedList)
         self.__test_delete_for_one_node(SinglyLinkedList)
         self.__test_delete_for_last_node_for_unsorted(SinglyLinkedList)
         self.__test_delete_general(SinglyLinkedList)
@@ -26,7 +25,6 @@ class TestLinkedList(unittest.TestCase):
 
     def test_sorted_signly_linked_list(self):
         self.__test_insert(SortedSinglyLinkedList)
-        self.__test_delete_for_sorted(SortedSinglyLinkedList)
         self.__test_delete_for_one_node(SortedSinglyLinkedList)
         self.__test_delete_for_last_node_for_sorted(SortedSinglyLinkedList)
         self.__test_delete_general(SortedSinglyLinkedList)
@@ -39,7 +37,6 @@ class TestLinkedList(unittest.TestCase):
 
     def test_doubly_linked_list(self):
         self.__test_insert(DoublyLinkedList)
-        self.__test_delete_for_unsorted(DoublyLinkedList)
         self.__test_delete_for_one_node(DoublyLinkedList)
         self.__test_delete_for_last_node_for_unsorted(DoublyLinkedList)
         self.__test_delete_general(DoublyLinkedList)
@@ -52,7 +49,6 @@ class TestLinkedList(unittest.TestCase):
 
     def test_sorted_doubly_linked_list(self):
         self.__test_insert(SortedDoublyLinkedList)
-        self.__test_delete_for_sorted(SortedDoublyLinkedList)
         self.__test_delete_for_one_node(SortedDoublyLinkedList)
         self.__test_delete_for_last_node_for_sorted(SortedDoublyLinkedList)
         self.__test_delete_general(SortedDoublyLinkedList)
@@ -73,19 +69,8 @@ class TestLinkedList(unittest.TestCase):
             self.assertEqual(node.var, r)
             self.assertEqual(len(ll), count)
 
-    def __test_delete_for_unsorted(self, linked_list):
-        # dependent methods: insert
-        self.__test_delete_for_one_node(linked_list)
-        self.__test_delete_for_last_node(linked_list)
-        self.__test_delete_general(linked_list)
-
-    def __test_delete_for_sorted(self, linked_list):
-        # dependent methods: insert
-        self.__test_delete_for_one_node(linked_list)
-        self.__test_delete_for_last_node_for_sorted(linked_list)
-        self.__test_delete_general(linked_list)
-
     def __test_delete_for_one_node(self, linked_list):
+        # dependent methods: insert
         ll = linked_list()
         node = ll.insert(random())
         try:
@@ -94,6 +79,7 @@ class TestLinkedList(unittest.TestCase):
             self.fail()
 
     def __test_delete_for_last_node_for_unsorted(self, linked_list):
+        # dependent methods: insert
         ll = linked_list()
         ll.insert(random())
         for _ in range(0, 1000):
@@ -107,6 +93,7 @@ class TestLinkedList(unittest.TestCase):
                 self.fail()
 
     def __test_delete_for_last_node_for_sorted(self, linked_list):
+        # dependent methods: insert
         ll = linked_list()
         r = random()
         ll.insert(r)
@@ -122,6 +109,7 @@ class TestLinkedList(unittest.TestCase):
                 self.fail()
 
     def __test_delete_general(self, linked_list):
+        # dependent methods: insert
         ll = linked_list()
         count = 0
         for _ in range(0, 1000):
