@@ -20,6 +20,8 @@ class Queue():
         else:
             peek_node = self.__head_node.next
             self.__head_node.next = self.__head_node.next.next
+            if peek_node is self.__tail_node:
+                self.__tail_node = self.__head_node
             self.__len -= 1
             return peek_node.var
 
