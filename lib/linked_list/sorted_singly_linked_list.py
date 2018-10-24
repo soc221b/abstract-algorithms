@@ -75,7 +75,7 @@ class SortedSinglyLinkedList():
 
     # O(1)
     def successor(self, node):
-        # no verification for node whether it in this list or not.
+        # no verification for node whether it is in this list or not.
         return node.next
 
     # O(1)
