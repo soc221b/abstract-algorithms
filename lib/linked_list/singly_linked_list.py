@@ -31,11 +31,11 @@ class SinglyLinkedList():
 
     # O(n)
     def minimumn(self):
-        return self.__minmax(is_max=True)
+        return self.__minmax(is_min=True)
 
     # O(n)
     def maximum(self):
-        return self.__minmax(is_min=True)
+        return self.__minmax(is_max=True)
 
     # O(n)
     def __minmax(self, *, is_min=False, is_max=False):
