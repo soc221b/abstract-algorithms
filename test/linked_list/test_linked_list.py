@@ -118,10 +118,6 @@ class TestLinkedList(unittest.TestCase):
                 try:
                     ll.delete(node)
                 except Exception:
-                    logging.warning("__test_delete_general")
-                    logging.warning("node.val")
-                    logging.warning(node.val)
-                    logging.warning("__test_delete_general")
                     self.fail()
 
     def __test_minimum(self, linked_list):
