@@ -12,16 +12,16 @@ from lib.linked_list import (
 class TestLinkedList(unittest.TestCase):
 
     def test_signly_linked_list(self):
-        self.__test_unsorted(SinglyLinkedList())
+        self.__test_unsorted(SinglyLinkedList)
 
     def test_sorted_signly_linked_list(self):
-        self.__test_sorted(SortedSinglyLinkedList())
+        self.__test_sorted(SortedSinglyLinkedList)
 
     def test_doubly_linked_list(self):
-        self.__test_unsorted(DoublyLinkedList())
+        self.__test_unsorted(DoublyLinkedList)
 
     def test_sorted_doubly_linked_list(self):
-        self.__test_sorted(SortedDoublyLinkedList())
+        self.__test_sorted(SortedDoublyLinkedList)
 
     def __test_unsorted(self, linked_list):
         self.__test_predecessor_for_unsorted(linked_list())
