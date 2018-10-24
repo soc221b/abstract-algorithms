@@ -9,6 +9,13 @@ class SortedDoublyLinkedList():
         self.__len = 0
 
     # O(n)
+    def search(self, x):
+        curr = self.__head.next
+        while curr is not None and curr.var != x:
+            curr = self.successor(curr)
+        return curr
+
+    # O(n)
     def insert(self, x):
         new_node = ListNode(x)
         prev = self.find_smaller_than(x)
@@ -34,20 +41,6 @@ class SortedDoublyLinkedList():
         return prev
 
     # O(1)
-    def minimum(self):
-        if self.is_empty():
-            raise KeyError
-        else:
-            return self.__head.next
-
-    # O(1)
-    def maximum(self):
-        if self.is_empty():
-            raise KeyError
-        else:
-            return self.__tail
-
-    # O(1)
     def delete(self, node):
         predecessor = self.predecessor(node)
         successor = self.successor(node)
@@ -63,23 +56,30 @@ class SortedDoublyLinkedList():
         self.__len -= 1
 
     # O(1)
-    def predecessor(self, node):
-        if node.prev is self.__head:
-            return None
+    def minimum(self):
+        if self.is_empty():
+            raise KeyError
         else:
-            return node.prev
+            return self.__head.next
 
-    # O(n)
-    def search(self, x):
-        curr = self.__head.next
-        while curr is not None and curr.var != x:
-            curr = self.successor(curr)
-        return curr
+    # O(1)
+    def maximum(self):
+        if self.is_empty():
+            raise KeyError
+        else:
+            return self.__tail
 
     # O(1)
     def successor(self, node):
         # no verification for node whether it in this list or not.
         return node.next
+
+    # O(1)
+    def predecessor(self, node):
+        if node.prev is self.__head:
+            return None
+        else:
+            return node.prev
 
     # O(1)
     def __len__(self):
