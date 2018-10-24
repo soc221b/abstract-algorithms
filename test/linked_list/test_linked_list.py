@@ -13,48 +13,48 @@ class TestLinkedList(unittest.TestCase):
 
     def test_signly_linked_list(self):
         self.__test_insert(SinglyLinkedList)
+        self.__test_search(SinglyLinkedList)
         self.__test_delete_for_one_node(SinglyLinkedList)
         self.__test_delete_for_last_node_for_unsorted(SinglyLinkedList)
         self.__test_delete_general(SinglyLinkedList)
         self.__test_minimum(SinglyLinkedList)
         self.__test_maximum(SinglyLinkedList)
-        self.__test_search(SinglyLinkedList)
         self.__test_predecessor_for_unsorted(SinglyLinkedList)
         self.__test_successor_for_unsorted(SinglyLinkedList)
         self.__test_is_empty(SinglyLinkedList)
 
     def test_sorted_signly_linked_list(self):
         self.__test_insert(SortedSinglyLinkedList)
+        self.__test_search(SortedSinglyLinkedList)
         self.__test_delete_for_one_node(SortedSinglyLinkedList)
         self.__test_delete_for_last_node_for_sorted(SortedSinglyLinkedList)
         self.__test_delete_general(SortedSinglyLinkedList)
         self.__test_minimum(SortedSinglyLinkedList)
         self.__test_maximum(SortedSinglyLinkedList)
-        self.__test_search(SortedSinglyLinkedList)
         self.__test_predecessor_for_sorted(SortedSinglyLinkedList)
         self.__test_successor_for_sorted(SortedSinglyLinkedList)
         self.__test_is_empty(SortedSinglyLinkedList)
 
     def test_doubly_linked_list(self):
         self.__test_insert(DoublyLinkedList)
+        self.__test_search(DoublyLinkedList)
         self.__test_delete_for_one_node(DoublyLinkedList)
         self.__test_delete_for_last_node_for_unsorted(DoublyLinkedList)
         self.__test_delete_general(DoublyLinkedList)
         self.__test_minimum(DoublyLinkedList)
         self.__test_maximum(DoublyLinkedList)
-        self.__test_search(DoublyLinkedList)
         self.__test_predecessor_for_unsorted(DoublyLinkedList)
         self.__test_successor_for_unsorted(DoublyLinkedList)
         self.__test_is_empty(DoublyLinkedList)
 
     def test_sorted_doubly_linked_list(self):
         self.__test_insert(SortedDoublyLinkedList)
+        self.__test_search(SortedDoublyLinkedList)
         self.__test_delete_for_one_node(SortedDoublyLinkedList)
         self.__test_delete_for_last_node_for_sorted(SortedDoublyLinkedList)
         self.__test_delete_general(SortedDoublyLinkedList)
         self.__test_minimum(SortedDoublyLinkedList)
         self.__test_maximum(SortedDoublyLinkedList)
-        self.__test_search(SortedDoublyLinkedList)
         self.__test_predecessor_for_sorted(SortedDoublyLinkedList)
         self.__test_successor_for_sorted(SortedDoublyLinkedList)
         self.__test_is_empty(SortedDoublyLinkedList)
@@ -69,6 +69,14 @@ class TestLinkedList(unittest.TestCase):
                 node = ll.insert(r)
                 self.assertEqual(node.var, r)
                 self.assertEqual(len(ll), count)
+
+    def __test_search(self, linked_list):
+        # dependent methods: insert
+        ll = linked_list()
+        for _ in range(0, 100):
+            r = random()
+            ll.insert(r)
+            self.assertIsNot(ll.search(r), None)
 
     def __test_delete_for_one_node(self, linked_list):
         # dependent methods: insert
@@ -149,14 +157,6 @@ class TestLinkedList(unittest.TestCase):
             for n in random_ns:
                 ll.insert(n)
             self.assertEqual(ll.maximum().var, sorted_ns[-1])
-
-    def __test_search(self, linked_list):
-        # dependent methods: insert
-        ll = linked_list()
-        for _ in range(0, 100):
-            r = random()
-            ll.insert(r)
-            self.assertIsNot(ll.search(r), None)
 
     def __test_predecessor_for_unsorted(self, linked_list):
         # dependent methods: insert, search
