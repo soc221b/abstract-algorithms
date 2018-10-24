@@ -15,10 +15,13 @@ class Queue():
         self.__len += 1
 
     def pop(self):
-        peek_node = self.__head_node.next
-        self.__head_node.next = peek_node.next
-        self.__len -= 1
-        return peek_node.var
+        if self.is_empty():
+            raise IndexError
+        else:
+            peek_node = self.__head_node.next
+            self.__head_node.next = peek_node.next
+            self.__len -= 1
+            return peek_node.var
 
     def peek(self):
         return self.__head_node.next.var
