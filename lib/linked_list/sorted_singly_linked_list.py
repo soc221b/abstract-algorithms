@@ -46,6 +46,9 @@ class SortedSinglyLinkedList():
         if self.is_empty():
             raise KeyError
         else:
+            head = self.__head.next
+            while head is not None:
+                logging.info(head.var)
             return self.__head.next
 
     # O(1)
@@ -53,6 +56,9 @@ class SortedSinglyLinkedList():
         if self.is_empty():
             raise KeyError
         else:
+            head = self.__head.next
+            while head is not None:
+                logging.info(head.var)
             return self.__tail
 
     # O(n)
