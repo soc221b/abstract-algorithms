@@ -16,7 +16,7 @@ class Queue():
 
     def pop(self):
         peek_node = self.__head_node.next
-        self.__head_node.next = peek_node.next()
+        self.__head_node.next = peek_node.next
         self.__len -= 1
         return peek_node.var
 
