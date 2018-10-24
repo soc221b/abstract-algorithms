@@ -42,18 +42,10 @@ class DoublyLinkedList():
 
     # O(n)
     def minimum(self):
-        head = self.__head.next
-        while head is not None:
-            logging.info(head.var)
-            head = head.next
         return self.__minmax(is_min=True)
 
     # O(n)
     def maximum(self):
-        head = self.__head.next
-        while head is not None:
-            logging.info(head.var)
-            head = head.next
         return self.__minmax(is_max=True)
 
     # O(n)
