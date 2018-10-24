@@ -68,6 +68,10 @@ class SinglyLinkedList():
         while prev.next is not None and prev.next != node:
             prev = prev.next
         if prev.next is None:
+            print(prev is self.__head)
+            print(prev.var)
+            print(node.var)
+            print(len(self))
             raise IndexError
         else:
             return prev
