@@ -12,7 +12,7 @@ class SortedDoublyLinkedList():
     def search(self, x):
         curr = self.__head.next
         while curr is not None and curr.var != x:
-            curr = self.successor(curr)
+            curr = curr.next
         return curr
 
     # O(n)
@@ -24,7 +24,7 @@ class SortedDoublyLinkedList():
             new_node.prev = prev
             self.__tail = new_node
         else:
-            next = self.successor(prev)
+            next = prev.next
             new_node.prev = prev
             new_node.next = next
             prev.next = new_node
@@ -35,9 +35,9 @@ class SortedDoublyLinkedList():
     # O(n)
     def find_smaller_than(self, x):
         prev = self.__head
-        while (self.successor(prev) is not None
-               and self.successor(prev).var < x):
-            prev = self.successor(prev)
+        while (prev.next is not None
+               and prev.next.var < x):
+            prev = prev.next
         return prev
 
     # O(1)
