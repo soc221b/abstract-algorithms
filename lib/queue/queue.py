@@ -24,7 +24,10 @@ class Queue():
             return peek_node.var
 
     def peek(self):
-        return self.__head_node.next.var
+        if self.is_empty():
+            raise IndexError
+        else:
+            return self.__head_node.next.var
 
     def is_empty(self):
         return len(self) == 0
