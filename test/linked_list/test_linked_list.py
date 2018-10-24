@@ -28,12 +28,12 @@ class TestLinkedList(unittest.TestCase):
         self.__test_successor_for_unsorted(linked_list())
         self.__test_general(linked_list())
 
-    def __test_sorted(self, ll):
+    def __test_sorted(self, linked_list):
         self.__test_predecessor_for_sorted(linked_list())
         self.__test_successor_for_sorted(linked_list())
         self.__test_general(linked_list())
 
-    def __test_general(self, ll):
+    def __test_general(self, linked_list):
         self.__test_insert(linked_list())
         self.__test_delete(linked_list())
         self.__test_is_empty(linked_list())
