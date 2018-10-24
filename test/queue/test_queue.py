@@ -33,25 +33,26 @@ class TestQueue(unittest.TestCase):
 
     def test_queue_pop(self):
         que = Queue()
-        random_values = get_random_values()
-        for v in random_values:
-            que.push(v)
-        for v in random_values:
-            que.pop()
-        self.assertEqual(que.is_empty(), True)
-        with self.assertRaises(IndexError):
-            que.pop()
-        with self.assertRaises(IndexError):
-            que.peek()
+        ns = []
+        for _ in range(0, 1000):
+            que.push(random())
+            ns.append(0)
+            while random() > 0.6 and len(ns) > 0:
+                que.pop()
+                del ns[-1]
 
     def test_queue_peek(self):
         que = Queue()
-        random_values = get_random_values()
-        for v in random_values:
-            que.push(v)
-        for v in random_values:
-            self.assertEqual(que.peek(), v)
-            que.pop()
+        ns = []
+        for _ in range(0, 1000):
+            r = random()
+            que.push(r)
+            ns.append(r)
+            while random() > 0.6 and len(ns) > 0:
+                que.pop()
+                del ns[0]
+            if len(ns) > 0:
+                self.assertEqual(que.peek(), ns[0])
 
     def test_queue_is_empty(self):
         que = Queue()
