@@ -113,7 +113,6 @@ class TestLinkedList(unittest.TestCase):
                 self.assertIsNot(ll.search(r), None)
                 if random() > 0.5:
                     break
-            
 
     def __test_delete_for_last_node_for_sorted(self, linked_list):
         # dependent methods: insert, search
