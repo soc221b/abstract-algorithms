@@ -38,6 +38,8 @@ class SortedSinglyLinkedList():
     # O(n)
     def delete(self, node):
         prev = self.__prev(node)
+        if prev.next == self.__tail:
+            self.__tail = prev
         prev.next = node.next
         self.__len -= 1
 
