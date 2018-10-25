@@ -28,8 +28,8 @@ class SinglyLinkedList():
     # O(n)
     def delete(self, node):
         prev = self.__prev(node)
-        if len(self) == 1:
-            self.__tail = self.__head
+        if node is self.__tail:
+            self.__tail = prev
         prev.next = node.next
         self.__len -= 1
 
