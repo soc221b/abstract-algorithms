@@ -17,8 +17,7 @@ class TestLinkedList(unittest.TestCase):
         self.__test_delete_for_one_node(SinglyLinkedList)
         self.__test_delete_for_last_node_for_unsorted(SinglyLinkedList)
         self.__test_delete_general(SinglyLinkedList)
-        self.__test_minimum(SinglyLinkedList)
-        self.__test_maximum(SinglyLinkedList)
+        self.__test_minimum_and_maximum(SinglyLinkedList)
         self.__test_predecessor_for_unsorted(SinglyLinkedList)
         self.__test_successor_for_unsorted(SinglyLinkedList)
         self.__test_is_empty(SinglyLinkedList)
@@ -29,8 +28,7 @@ class TestLinkedList(unittest.TestCase):
         self.__test_delete_for_one_node(SortedSinglyLinkedList)
         self.__test_delete_for_last_node_for_sorted(SortedSinglyLinkedList)
         self.__test_delete_general(SortedSinglyLinkedList)
-        self.__test_minimum(SortedSinglyLinkedList)
-        self.__test_maximum(SortedSinglyLinkedList)
+        self.__test_minimum_and_maximum(SortedSinglyLinkedList)
         self.__test_predecessor_for_sorted(SortedSinglyLinkedList)
         self.__test_successor_for_sorted(SortedSinglyLinkedList)
         self.__test_is_empty(SortedSinglyLinkedList)
@@ -41,8 +39,7 @@ class TestLinkedList(unittest.TestCase):
         self.__test_delete_for_one_node(DoublyLinkedList)
         self.__test_delete_for_last_node_for_unsorted(DoublyLinkedList)
         self.__test_delete_general(DoublyLinkedList)
-        self.__test_minimum(DoublyLinkedList)
-        self.__test_maximum(DoublyLinkedList)
+        self.__test_minimum_and_maximum(DoublyLinkedList)
         self.__test_predecessor_for_unsorted(DoublyLinkedList)
         self.__test_successor_for_unsorted(DoublyLinkedList)
         self.__test_is_empty(DoublyLinkedList)
@@ -53,8 +50,7 @@ class TestLinkedList(unittest.TestCase):
         self.__test_delete_for_one_node(SortedDoublyLinkedList)
         self.__test_delete_for_last_node_for_sorted(SortedDoublyLinkedList)
         self.__test_delete_general(SortedDoublyLinkedList)
-        self.__test_minimum(SortedDoublyLinkedList)
-        self.__test_maximum(SortedDoublyLinkedList)
+        self.__test_minimum_and_maximum(SortedDoublyLinkedList)
         self.__test_predecessor_for_sorted(SortedDoublyLinkedList)
         self.__test_successor_for_sorted(SortedDoublyLinkedList)
         self.__test_is_empty(SortedDoublyLinkedList)
@@ -82,9 +78,7 @@ class TestLinkedList(unittest.TestCase):
         # dependent methods: insert, search
         ll = linked_list()
         for _ in range(0, 100):
-            r = random()
-            node = ll.insert(r)
-            self.assertIsNot(ll.search(r), None)
+            node = ll.search(self.__insert(ll))
             try:
                 ll.delete(node)
             except Exception:
@@ -93,112 +87,57 @@ class TestLinkedList(unittest.TestCase):
     def __test_delete_for_last_node_for_unsorted(self, linked_list):
         # dependent methods: insert, search
         ll = linked_list()
-        ns = []
-        r = random()
-        ll.insert(r)
-        ns.append(r)
-        self.assertIsNot(ll.search(r), None)
-        for _ in range(0, 100):
-            try:
-                while len(ns) > 0 and random() > 0.5:
-                    node = ll.search(ns[-1])
-                    ll.delete(node)
-                    del ns[-1]
-            except Exception:
-                self.fail()
-            while True:
-                r = random()
-                ll.insert(r)
-                ns.append(r)
-                self.assertIsNot(ll.search(r), None)
-                if random() > 0.5:
-                    break
+        rs = []
+        rs.append(self.__insert(ll))
+        for _ in range(0, 1000):
+            rs = self.__delete_multiple_times_for_last(ll, rs)
+            rs.extend(self.__insert_multiple_times(ll))
 
     def __test_delete_for_last_node_for_sorted(self, linked_list):
         # dependent methods: insert, search
         ll = linked_list()
-        ns = []
-        r = random()
-        ll.insert(r)
-        ns.append(r)
-        self.assertIsNot(ll.search(r), None)
+        rs = []
+        rs.append(self.__insert(ll))
         for _ in range(0, 1000):
-            try:
-                while len(ns) > 0 and random() > 0.5:
-                    node = ll.search(ns[-1])
-                    ll.delete(node)
-                    del ns[-1]
-            except Exception:
-                self.fail()
-            while True:
-                r += random()
-                ll.insert(r)
-                ns.append(r)
-                self.assertIsNot(ll.search(r), None)
-                if random() > 0.5:
-                    break
+            rs = self.__delete_multiple_times_for_last(ll, rs)
+            rs.extend(self.__insert_multiple_times(ll))
+            rs.sort()
 
     def __test_delete_general(self, linked_list):
         # dependent methods: insert, search
         ll = linked_list()
-        ns = []
-        for _ in range(0, 100):
-            while True:
-                r = random()
-                ll.insert(r)
-                ns.append(r)
-                self.assertIsNot(ll.search(r), None)
-                if random() > 0.5:
-                    break
-            while len(ns) > 0 and random() > 0.5:
-                try:
-                    rand_index = randint(0, len(ns) - 1)
-                    node = ll.search(ns[rand_index])
-                    ll.delete(node)
-                    del ns[rand_index]
-                except Exception:
-                    self.fail()
+        rs = []
+        for _ in range(0, 1000):
+            rs.extend(self.__insert_multiple_times(ll))
+            shuffle(rs)
+            rs = self.__delete_multiple_times_for_last(ll, rs)
 
-    def __test_minimum(self, linked_list):
+    def __test_minimum_and_maximum(self, linked_list):
         # dependent methods: insert
         for _ in range(0, 100):
             ll = linked_list()
-            sorted_ns = []
+            sorted_rs = []
             r = random()
             for _ in range(0, 100):
-                sorted_ns.append(r)
+                sorted_rs.append(r)
                 r += random()
-            random_ns = sorted_ns[:]
-            shuffle(random_ns)
-            for n in random_ns:
+            random_rs = sorted_rs[:]
+            shuffle(random_rs)
+            for n in random_rs:
                 ll.insert(n)
-            self.assertEqual(ll.minimum().var, sorted_ns[0])
-
-    def __test_maximum(self, linked_list):
-        # dependent methods: insert
-        for _ in range(0, 100):
-            ll = linked_list()
-            sorted_ns = []
-            r = random()
-            for _ in range(0, 100):
-                sorted_ns.append(r)
-                r += random()
-            random_ns = sorted_ns[:]
-            shuffle(random_ns)
-            for n in random_ns:
-                ll.insert(n)
-            self.assertEqual(ll.maximum().var, sorted_ns[-1])
+            self.assertEqual(ll.minimum().var, sorted_rs[0])
+            self.assertEqual(ll.maximum().var, sorted_rs[-1])
 
     def __test_predecessor_for_unsorted(self, linked_list):
         # dependent methods: insert, search
         ll = linked_list()
-        random_ns = [random() for _ in range(0, 300)]
-        for n in random_ns:
+        random_rs = [random() for _ in range(0, 300)]
+        for n in random_rs:
             ll.insert(n)
 
-        prev = ll.search(random_ns[0])
+        prev = ll.search(random_rs[0])
         self.assertIs(ll.predecessor(prev), None)
-        for n in random_ns[1:]:
+        for n in random_rs[1:]:
             curr = ll.search(n)
             self.assertEqual(ll.predecessor(curr), prev)
             prev = curr
@@ -206,28 +145,28 @@ class TestLinkedList(unittest.TestCase):
     def __test_predecessor_for_sorted(self, linked_list):
         # dependent methods: insert, search
         ll = linked_list()
-        sorted_ns = [n for n in range(0, 300)]
-        random_ns = sorted_ns[:]
-        shuffle(random_ns)
-        for n in random_ns:
+        sorted_rs = [n for n in range(0, 300)]
+        random_rs = sorted_rs[:]
+        shuffle(random_rs)
+        for n in random_rs:
             ll.insert(n)
 
-        self.assertIs(ll.predecessor(ll.search(sorted_ns[0])), None)
-        for index in range(0, len(sorted_ns) - 1):
-            prev = ll.search(sorted_ns[index])
-            curr = ll.search(sorted_ns[index + 1])
+        self.assertIs(ll.predecessor(ll.search(sorted_rs[0])), None)
+        for index in range(0, len(sorted_rs) - 1):
+            prev = ll.search(sorted_rs[index])
+            curr = ll.search(sorted_rs[index + 1])
             self.assertEqual(ll.predecessor(curr), prev)
 
     def __test_successor_for_unsorted(self, linked_list):
         # dependent methods: insert, search
         ll = linked_list()
-        random_ns = [random() for _ in range(0, 300)]
-        for n in random_ns:
+        random_rs = [random() for _ in range(0, 300)]
+        for n in random_rs:
             ll.insert(n)
 
-        next = ll.search(random_ns[-1])
+        next = ll.search(random_rs[-1])
         self.assertIs(ll.successor(next), None)
-        for n in random_ns[::-1][1:]:
+        for n in random_rs[::-1][1:]:
             curr = ll.search(n)
             self.assertEqual(ll.successor(curr), next)
             next = curr
@@ -235,28 +174,51 @@ class TestLinkedList(unittest.TestCase):
     def __test_successor_for_sorted(self, linked_list):
         # dependent methods: insert, search
         ll = linked_list()
-        sorted_ns = [n for n in range(0, 300)]
-        random_ns = sorted_ns[:]
-        shuffle(random_ns)
-        for n in random_ns:
+        sorted_rs = [n for n in range(0, 300)]
+        random_rs = sorted_rs[:]
+        shuffle(random_rs)
+        for n in random_rs:
             ll.insert(n)
 
-        self.assertIs(ll.successor(ll.search(sorted_ns[-1])), None)
-        for index in range(0, len(sorted_ns) - 1):
-            curr = ll.search(sorted_ns[index])
-            next = ll.search(sorted_ns[index + 1])
+        self.assertIs(ll.successor(ll.search(sorted_rs[-1])), None)
+        for index in range(0, len(sorted_rs) - 1):
+            curr = ll.search(sorted_rs[index])
+            next = ll.search(sorted_rs[index + 1])
             self.assertEqual(ll.successor(curr), next)
 
     def __test_is_empty(self, linked_list):
         # dependent methods: insert, search, delete
         ll = linked_list()
-        ns = []
+        rs = []
         for _ in range(0, 100):
-            self.assertEqual(len(ns) == 0, ll.is_empty())
-            if random() > 0.6:
-                r = random()
-                ll.insert(r)
-                ns.append(r)
-            if random() > 0.4 and len(ns) != 0:
-                ll.delete(ll.search(ns[-1]))
-                del ns[-1]
+            self.assertEqual(len(rs) == 0, ll.is_empty())
+            rs.extend(self.__insert_multiple_times(ll))
+            rs = self.__delete_multiple_times_for_last(ll, rs)
+
+    def __insert(self, ll):
+        r = random()
+        ll.insert(r)
+        self.assertIsNot(ll.search(r), None)
+        return r
+
+    def __insert_multiple_times(self, ll):
+        rs = []
+        while True:
+            rs.append(self.__insert(ll))
+            if random() > 0.7:
+                break
+        return rs
+
+    def __delete_for_last(self, ll, rs):
+        if len(rs) > 0:
+            node = ll.search(rs[-1])
+            ll.delete(node)
+            del rs[-1]
+        return rs
+
+    def __delete_multiple_times_for_last(self, ll, rs):
+        while len(rs) > 0:
+            rs = self.__delete_for_last(ll, rs)
+            if random() > 0.7:
+                break
+        return rs
