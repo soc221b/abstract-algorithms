@@ -56,8 +56,3 @@ class AdjacencyMatrix():
                 s += "T" if col else "F"
             s += "\n"
         return s
-
-
-class AdjacencyList():
-    def __init__(self):
-        raise NotImplementedError  # no tests
