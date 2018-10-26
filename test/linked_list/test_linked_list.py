@@ -1,5 +1,5 @@
 import unittest
-from random import random, shuffle, randint
+from random import random, shuffle
 
 from lib.linked_list import (
     SinglyLinkedList,
