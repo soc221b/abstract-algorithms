@@ -1,15 +1,38 @@
-from random import randint, random
 from math import log, ceil
 
 
 class MinMaxHeap():
+    """
+    operations and time complexity:
+        min: O(1)
+        max: O(1)
+        insert: O(log n)
+        delete_min: O(log n)
+        delete_max: O(log n)
+        is_empty: O(1)
+    """
 
     def __init__(self, _list=[]):
         # no test
-        raise NotImplementedError
+        # raise NotImplementedError
         self._list = []
         for elem in _list:
             self.insert(elem)
+
+    def min(self):
+        if not self.is_empty():
+            return self._list[0]
+        else:
+            return None
+
+    def max(self):
+        if not self.is_empty():
+            return self._list[self.__max_at()]
+        else:
+            return None
+
+    def is_empty(self):
+        return len(self._list) == 0
 
 # insert begin
     def insert(self, x):
@@ -217,21 +240,6 @@ class MinMaxHeap():
     def __get_leftest_grand_child(self, index):
         return ((index + 1) * 2 * 2) - 1
 
-    def min(self):
-        if not self.is_empty():
-            return self._list[0]
-        else:
-            return None
-
-    def max(self):
-        if not self.is_empty():
-            return self._list[self.__max_at()]
-        else:
-            return None
-
-    def is_empty(self):
-        return len(self._list) == 0
-
     def __max_at(self):
         _max = 0
         left = 1
@@ -261,52 +269,3 @@ class MinMaxHeap():
 
     def __is_greater_than(self, index_a, index_b):
         return self._list[index_a] > self._list[index_b]
-
-
-if __name__ == "__main__":
-    for _ in range(0, 10):
-        for i in range(0, 10000):
-            t = []
-            h = MinMaxHeap()
-            for j in range(0, i):
-                x = random()
-                t.append(x)
-                h.insert(x)
-                t.sort()
-                while len(t) > 0 and random() > 0.8:
-                    if random() > 0.5:
-                        del t[0]
-                        h.delete_min()
-                    else:
-                        del t[-1]
-                        h.delete_max()
-                    pass
-                if len(t) == 0:
-                    assert h.min() is None
-                    assert h.max() is None
-                else:
-                    assert h.min() == t[0]
-                    assert h.max() == t[-1]
-            if random() > 0.5:
-                a = []
-                for _ in range(0, len(t)):
-                    a.append(h.delete_min())
-                assert a == t
-            else:
-                a = []
-                for _ in range(0, len(t)):
-                    a.append(h.delete_max())
-                a = list(reversed(a))
-                assert a == t
-
-            # print()
-            # print(a)
-            # print(t)
-            # if h.min() != t[0]:
-            #     print(h.min())
-            #     print(t[0])
-            #     print()
-            # if h.max() != t[-1]:
-            #     print(h.max())
-            #     print(t[-1])
-        #     print()
