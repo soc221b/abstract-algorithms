@@ -1,3 +1,4 @@
+from random import randint, random
 from math import log, ceil
 
 
@@ -10,6 +11,7 @@ class MinMaxHeap():
         for elem in _list:
             self.insert(elem)
 
+# insert begin
     def insert(self, x):
         self._list.append(x)
         latest_index = len(self._list) - 1
@@ -21,12 +23,12 @@ class MinMaxHeap():
     def __update_min_bottom_up(self, index):
         if index <= 0:
             return
-        parent = self.__get_parent(index)
-        grand_parent = self.__get_grand_parent(index)
+        parent = self.__get_parent_index(index)
+        grand_parent = self.__get_grand_parent_index(index)
         if self.__is_greater_than(index, parent):
             self.__swap(index, parent)
             self.__update_max_bottom_up(parent)
-        elif (grand_parent >= 0 and
+        elif (self.__is_in_valid_range(grand_parent) and
               self.__is_smaller_than(index, grand_parent)):
             self.__swap(index, grand_parent)
             self.__update_min_bottom_up(grand_parent)
@@ -34,64 +36,58 @@ class MinMaxHeap():
     def __update_max_bottom_up(self, index):
         if index <= 0:
             return
-        parent = self.__get_parent(index)
-        grand_parent = self.__get_grand_parent(index)
+        parent = self.__get_parent_index(index)
+        grand_parent = self.__get_grand_parent_index(index)
         if self.__is_smaller_than(index, parent):
             self.__swap(index, parent)
             self.__update_min_bottom_up(parent)
-        elif (grand_parent >= 0 and
+        elif (self.__is_in_valid_range(grand_parent) and
               self.__is_greater_than(index, grand_parent)):
             self.__swap(index, grand_parent)
             self.__update_max_bottom_up(grand_parent)
+# insert end
 
+# delete min begin
     def delete_min(self):
+        if self.is_empty():
+            return None
+
         _min = self.min()
+
+        # maintain
         latest_index = len(self._list) - 1
         self._list[0] = self._list[latest_index]
         del self._list[latest_index]
-
-        self.__update_min_top_down(0)
+        if self.__is_in_valid_range(0):
+            self.__update_min_top_down(0)
 
         return _min
 
     def __update_min_top_down(self, index):
-        child = self.__get_leftest_child(index)
         grand_child = self.__get_leftest_grand_child(index)
-        if self.__is_in_valid_range(grand_child):
-            min_index = self.__find_smallest_for_grand_childs(index)
-            if min_index != index:
-                self.__swap(min_index, index)
+
+        min_index = self.__find_smallest(index)
+
+        if min_index != index:
+            self.__swap(min_index, index)
+            if min_index >= grand_child:
+                parent = self.__get_parent_index(min_index)
+                if self.__is_greater_than(min_index, parent):
+                    self.__swap(min_index, parent)
                 self.__update_min_top_down(min_index)
 
-        elif self.__is_in_valid_range(child):
-            min_index = self.__find_smallest_for_childs(index)
-            if min_index != index:
-                self.__swap(min_index, index)
+    def __find_smallest(self, index):
+        min_index_for_grand_childs = \
+            self.__find_smallest_for_grand_childs(index)
+        # the min-max-tree is complete B.T.,
+        # hence level for left tree may larger than right tree.
+        min_index_for_childs = self.__find_smallest_for_childs(index)
 
-    def delete_max(self):
-        max_at = self.__max_at()
-        _max = self._list[max_at]
-        latest_index = len(self._list) - 1
-        self._list[max_at] = self._list[latest_index]
-        del self._list[latest_index]
-
-        self.__update_max_top_down(max_at)
-
-        return _max
-
-    def __update_max_top_down(self, index):
-        child = self.__get_leftest_child(index)
-        grand_child = self.__get_leftest_grand_child(index)
-        if self.__is_in_valid_range(grand_child):
-            max_index = self.__find_greatest_for_grand_childs(index)
-            if max_index != index:
-                self.__swap(max_index, index)
-                self.__update_max_top_down(max_index)
-
-        elif self.__is_in_valid_range(child):
-            max_index = self.__find_greatest_for_childs(index)
-            if max_index != index:
-                self.__swap(max_index, index)
+        if self.__is_smaller_than(
+           min_index_for_childs, min_index_for_grand_childs):
+            return min_index_for_childs
+        else:
+            return min_index_for_grand_childs
 
     def __find_smallest_for_grand_childs(self, index):
         min_index = index
@@ -99,7 +95,9 @@ class MinMaxHeap():
         lr = ll + 1
         rl = ll + 2
         rr = ll + 3
-        if self.__is_greater_than(min_index, ll):
+
+        if (self.__is_in_valid_range(ll) and
+           self.__is_greater_than(min_index, ll)):
             min_index = ll
         if (self.__is_in_valid_range(lr) and
            self.__is_greater_than(min_index, lr)):
@@ -111,24 +109,64 @@ class MinMaxHeap():
            self.__is_greater_than(min_index, rr)):
             min_index = rr
 
-        # the min-max-tree is complete B.T.,
-        # hence level for left tree may larger than right tree.
-        min_index_for_childs = self.__find_smallest_for_childs(index)
-        if self.__is_smaller_than(min_index_for_childs, min_index):
-            min_index = min_index_for_childs
-
         return min_index
 
     def __find_smallest_for_childs(self, index):
         min_index = index
         l = self.__get_leftest_child(index)
         r = l + 1
-        if self.__is_greater_than(min_index, l):
+
+        if (self.__is_in_valid_range(l) and
+           self.__is_greater_than(min_index, l)):
             min_index = l
         if (self.__is_in_valid_range(r) and
            self.__is_greater_than(min_index, r)):
             min_index = r
+
         return min_index
+# delete min end
+
+# delete max begin
+    def delete_max(self):
+        if self.is_empty():
+            return None
+
+        max_at = self.__max_at()
+        _max = self._list[max_at]
+
+        # maintain
+        latest_index = len(self._list) - 1
+        self._list[max_at] = self._list[latest_index]
+        del self._list[latest_index]
+        if self.__is_in_valid_range(max_at):
+            self.__update_max_top_down(max_at)
+
+        return _max
+
+    def __update_max_top_down(self, index):
+        grand_child = self.__get_leftest_grand_child(index)
+        max_index = self.__find_greatest(index)
+
+        if max_index != index:
+            self.__swap(max_index, index)
+            if max_index >= grand_child:
+                parent = self.__get_parent_index(max_index)
+                if self.__is_smaller_than(max_index, parent):
+                    self.__swap(max_index, parent)
+                self.__update_max_top_down(max_index)
+
+    def __find_greatest(self, index):
+        max_index_for_grand_childs = \
+            self.__find_greatest_for_grand_childs(index)
+        # the min-max-tree is complete B.T.,
+        # hence level for left tree may larger than right tree.
+        max_index_for_childs = self.__find_greatest_for_childs(index)
+
+        if self.__is_greater_than(
+           max_index_for_childs, max_index_for_grand_childs):
+            return max_index_for_childs
+        else:
+            return max_index_for_grand_childs
 
     def __find_greatest_for_grand_childs(self, index):
         max_index = index
@@ -136,7 +174,9 @@ class MinMaxHeap():
         lr = ll + 1
         rl = ll + 2
         rr = ll + 3
-        if self.__is_smaller_than(max_index, ll):
+
+        if (self.__is_in_valid_range(ll) and
+           self.__is_smaller_than(max_index, ll)):
             max_index = ll
         if (self.__is_in_valid_range(lr) and
            self.__is_smaller_than(max_index, lr)):
@@ -148,29 +188,27 @@ class MinMaxHeap():
            self.__is_smaller_than(max_index, rr)):
             max_index = rr
 
-        # the min-max-tree is complete B.T.,
-        # hence level for left tree may larger than right tree.
-        max_index_for_childs = self.__find_greatest_for_childs(index)
-        if self.__is_greater_than(max_index_for_childs, max_index):
-            max_index = max_index_for_childs
-
         return max_index
 
     def __find_greatest_for_childs(self, index):
         max_index = index
         l = self.__get_leftest_child(index)
         r = l + 1
-        if self.__is_smaller_than(max_index, l):
+
+        if (self.__is_in_valid_range(l) and
+           self.__is_smaller_than(max_index, l)):
             max_index = l
         if (self.__is_in_valid_range(r) and
            self.__is_smaller_than(max_index, r)):
             max_index = r
-        return max_index
 
-    def __get_parent(self, index):
+        return max_index
+# delete max end
+
+    def __get_parent_index(self, index):
         return ((index + 1) // 2) - 1
 
-    def __get_grand_parent(self, index):
+    def __get_grand_parent_index(self, index):
         return ((index + 1) // 2 // 2) - 1
 
     def __get_leftest_child(self, index):
@@ -180,10 +218,19 @@ class MinMaxHeap():
         return ((index + 1) * 2 * 2) - 1
 
     def min(self):
-        return self._list[0]
+        if not self.is_empty():
+            return self._list[0]
+        else:
+            return None
 
     def max(self):
-        return self._list[self.__max_at()]
+        if not self.is_empty():
+            return self._list[self.__max_at()]
+        else:
+            return None
+
+    def is_empty(self):
+        return len(self._list) == 0
 
     def __max_at(self):
         _max = 0
@@ -192,16 +239,16 @@ class MinMaxHeap():
         if (self.__is_in_valid_range(left) and
            self.__is_greater_than(left, _max)):
             _max = left
-            if (self.__is_in_valid_range(right) and
-               self.__is_greater_than(right, _max)):
-                _max = right
+        if (self.__is_in_valid_range(right) and
+           self.__is_greater_than(right, _max)):
+            _max = right
         return _max
 
     def __swap(self, a, b):
         self._list[a], self._list[b] = self._list[b], self._list[a]
 
     def __is_in_valid_range(self, index):
-        return index < len(self._list)
+        return 0 <= index < len(self._list)
 
     def __is_at_min_level(self, index):
         return ceil(log(index + 2, 2)) % 2 == 1
@@ -214,3 +261,52 @@ class MinMaxHeap():
 
     def __is_greater_than(self, index_a, index_b):
         return self._list[index_a] > self._list[index_b]
+
+
+if __name__ == "__main__":
+    for _ in range(0, 10):
+        for i in range(0, 10000):
+            t = []
+            h = MinMaxHeap()
+            for j in range(0, i):
+                x = random()
+                t.append(x)
+                h.insert(x)
+                t.sort()
+                while len(t) > 0 and random() > 0.8:
+                    if random() > 0.5:
+                        del t[0]
+                        h.delete_min()
+                    else:
+                        del t[-1]
+                        h.delete_max()
+                    pass
+                if len(t) == 0:
+                    assert h.min() is None
+                    assert h.max() is None
+                else:
+                    assert h.min() == t[0]
+                    assert h.max() == t[-1]
+            if random() > 0.5:
+                a = []
+                for _ in range(0, len(t)):
+                    a.append(h.delete_min())
+                assert a == t
+            else:
+                a = []
+                for _ in range(0, len(t)):
+                    a.append(h.delete_max())
+                a = list(reversed(a))
+                assert a == t
+
+            # print()
+            # print(a)
+            # print(t)
+            # if h.min() != t[0]:
+            #     print(h.min())
+            #     print(t[0])
+            #     print()
+            # if h.max() != t[-1]:
+            #     print(h.max())
+            #     print(t[-1])
+        #     print()
