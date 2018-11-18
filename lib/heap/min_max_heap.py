@@ -136,15 +136,15 @@ class MinMaxHeap():
 
     def __find_smallest_for_childs(self, index):
         min_index = index
-        l = self.__get_leftest_child(index)
-        r = l + 1
+        left = self.__get_leftest_child(index)
+        right = left + 1
 
-        if (self.__is_in_valid_range(l) and
-           self.__is_greater_than(min_index, l)):
-            min_index = l
-        if (self.__is_in_valid_range(r) and
-           self.__is_greater_than(min_index, r)):
-            min_index = r
+        if (self.__is_in_valid_range(left) and
+           self.__is_greater_than(min_index, left)):
+            min_index = left
+        if (self.__is_in_valid_range(right) and
+           self.__is_greater_than(min_index, right)):
+            min_index = right
 
         return min_index
 # delete min end
@@ -215,15 +215,15 @@ class MinMaxHeap():
 
     def __find_greatest_for_childs(self, index):
         max_index = index
-        l = self.__get_leftest_child(index)
-        r = l + 1
+        left= self.__get_leftest_child(index)
+        right = left + 1
 
-        if (self.__is_in_valid_range(l) and
-           self.__is_smaller_than(max_index, l)):
-            max_index = l
-        if (self.__is_in_valid_range(r) and
-           self.__is_smaller_than(max_index, r)):
-            max_index = r
+        if (self.__is_in_valid_range(left) and
+           self.__is_smaller_than(max_index, left)):
+            max_index = left
+        if (self.__is_in_valid_range(right) and
+           self.__is_smaller_than(max_index, right)):
+            max_index = right
 
         return max_index
 # delete max end
