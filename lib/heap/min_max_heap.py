@@ -5,7 +5,7 @@ class MinMaxHeap():
 
     def __init__(self, _list=[]):
         # no test
-        # raise NotImplementedError
+        raise NotImplementedError
         self._list = []
         for elem in _list:
             self.insert(elem)
