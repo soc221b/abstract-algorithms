@@ -1,4 +1,3 @@
-from random import randint, random
 from math import log, ceil
 
 
@@ -6,7 +5,7 @@ class MinMaxHeap():
 
     def __init__(self, _list=[]):
         # no test
-        raise NotImplementedError
+        # raise NotImplementedError
         self._list = []
         for elem in _list:
             self.insert(elem)
@@ -105,12 +104,19 @@ class MinMaxHeap():
         if (self.__is_in_valid_range(lr) and
            self.__is_greater_than(min_index, lr)):
             min_index = lr
-            if (self.__is_in_valid_range(rl) and
-               self.__is_greater_than(min_index, rl)):
-                min_index = rl
-                if (self.__is_in_valid_range(rr) and
-                   self.__is_greater_than(min_index, rr)):
-                    min_index = rr
+        if (self.__is_in_valid_range(rl) and
+           self.__is_greater_than(min_index, rl)):
+            min_index = rl
+        if (self.__is_in_valid_range(rr) and
+           self.__is_greater_than(min_index, rr)):
+            min_index = rr
+
+        # the min-max-tree is complete B.T.,
+        # hence level for left tree may larger than right tree.
+        min_index_for_childs = self.__find_smallest_for_childs(index)
+        if self.__is_smaller_than(min_index_for_childs, min_index):
+            min_index = min_index_for_childs
+
         return min_index
 
     def __find_smallest_for_childs(self, index):
@@ -135,12 +141,19 @@ class MinMaxHeap():
         if (self.__is_in_valid_range(lr) and
            self.__is_smaller_than(max_index, lr)):
             max_index = lr
-            if (self.__is_in_valid_range(rl) and
-               self.__is_smaller_than(max_index, rl)):
-                max_index = rl
-                if (self.__is_in_valid_range(rr) and
-                   self.__is_smaller_than(max_index, rr)):
-                    max_index = rr
+        if (self.__is_in_valid_range(rl) and
+           self.__is_smaller_than(max_index, rl)):
+            max_index = rl
+        if (self.__is_in_valid_range(rr) and
+           self.__is_smaller_than(max_index, rr)):
+            max_index = rr
+
+        # the min-max-tree is complete B.T.,
+        # hence level for left tree may larger than right tree.
+        max_index_for_childs = self.__find_greatest_for_childs(index)
+        if self.__is_greater_than(max_index_for_childs, max_index):
+            max_index = max_index_for_childs
+
         return max_index
 
     def __find_greatest_for_childs(self, index):
@@ -201,30 +214,3 @@ class MinMaxHeap():
 
     def __is_greater_than(self, index_a, index_b):
         return self._list[index_a] > self._list[index_b]
-
-
-for _ in range(0, 1000):
-    for i in range(49, 50):
-        t = []
-        h = MinMaxHeap()
-        a = []
-        for j in range(0, i):
-            x = random()
-            t.append(x)
-            h.insert(x)
-        t.sort()
-    
-        for _ in range(0, len(t)):
-            a.insert(0, h.delete_max())
-        print(a)
-        print()
-        print(t)
-        assert a == t
-        # if h.min() != t[0]:
-        #     print(h.min())
-        #     print(t[0])
-        #     print()
-        # if h.max() != t[-1]:
-        #     print(h.max())
-        #     print(t[-1])
-    #     print()
