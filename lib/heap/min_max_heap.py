@@ -215,7 +215,7 @@ class MinMaxHeap():
 
     def __find_greatest_for_childs(self, index):
         max_index = index
-        left= self.__get_leftest_child(index)
+        left = self.__get_leftest_child(index)
         right = left + 1
 
         if (self.__is_in_valid_range(left) and
