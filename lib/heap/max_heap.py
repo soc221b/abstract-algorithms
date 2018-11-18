@@ -1,4 +1,4 @@
-from lib.heap import Heap
+from lib.heap.heap import Heap
 
 
 class MaxHeap(Heap):
