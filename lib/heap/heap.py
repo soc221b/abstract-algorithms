@@ -15,10 +15,10 @@ class Heap():
         right = left + 1
         upper_than_index = index
         if (self.__verify_range(left) and
-            self._upper_than(left, upper_than_index)):
+           self._upper_than(left, upper_than_index)):
             upper_than_index = left
         if (self.__verify_range(right) and
-            self._upper_than(right, upper_than_index)):
+           self._upper_than(right, upper_than_index)):
             upper_than_index = right
 
         if upper_than_index != index:
