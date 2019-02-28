@@ -5,13 +5,13 @@ from lib.tree import Node, BinaryTree, BinaryTreeTraverseDecorator
 
 """
                   10
-          /                \
+             /
          5                  15
-     /       \            /     \
+     /                    /
     2         8         13       17
-   / \       / \       /  \     /  \
+   /         /         /        /
   N   4     6   N    12    N   N    18
-     / \   / \      /  \           /  \
+     /     /        /              /
     3   N N   7    11   N         N    19
 """
 empty_binary_tree = BinaryTree()
